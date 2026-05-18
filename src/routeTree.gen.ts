@@ -9,38 +9,135 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PersonnalisationRouteImport } from './routes/personnalisation'
+import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
+import { Route as CollectionsRouteImport } from './routes/collections'
+import { Route as AvisRouteImport } from './routes/avis'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 
+const PersonnalisationRoute = PersonnalisationRouteImport.update({
+  id: '/personnalisation',
+  path: '/personnalisation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotreHistoireRoute = NotreHistoireRouteImport.update({
+  id: '/notre-histoire',
+  path: '/notre-histoire',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsRoute = CollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvisRoute = AvisRouteImport.update({
+  id: '/avis',
+  path: '/avis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductHandleRoute = ProductHandleRouteImport.update({
+  id: '/product/$handle',
+  path: '/product/$handle',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/avis': typeof AvisRoute
+  '/collections': typeof CollectionsRoute
+  '/notre-histoire': typeof NotreHistoireRoute
+  '/personnalisation': typeof PersonnalisationRoute
+  '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/avis': typeof AvisRoute
+  '/collections': typeof CollectionsRoute
+  '/notre-histoire': typeof NotreHistoireRoute
+  '/personnalisation': typeof PersonnalisationRoute
+  '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/avis': typeof AvisRoute
+  '/collections': typeof CollectionsRoute
+  '/notre-histoire': typeof NotreHistoireRoute
+  '/personnalisation': typeof PersonnalisationRoute
+  '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/avis'
+    | '/collections'
+    | '/notre-histoire'
+    | '/personnalisation'
+    | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/avis'
+    | '/collections'
+    | '/notre-histoire'
+    | '/personnalisation'
+    | '/product/$handle'
+  id:
+    | '__root__'
+    | '/'
+    | '/avis'
+    | '/collections'
+    | '/notre-histoire'
+    | '/personnalisation'
+    | '/product/$handle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AvisRoute: typeof AvisRoute
+  CollectionsRoute: typeof CollectionsRoute
+  NotreHistoireRoute: typeof NotreHistoireRoute
+  PersonnalisationRoute: typeof PersonnalisationRoute
+  ProductHandleRoute: typeof ProductHandleRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/personnalisation': {
+      id: '/personnalisation'
+      path: '/personnalisation'
+      fullPath: '/personnalisation'
+      preLoaderRoute: typeof PersonnalisationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notre-histoire': {
+      id: '/notre-histoire'
+      path: '/notre-histoire'
+      fullPath: '/notre-histoire'
+      preLoaderRoute: typeof NotreHistoireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections': {
+      id: '/collections'
+      path: '/collections'
+      fullPath: '/collections'
+      preLoaderRoute: typeof CollectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/avis': {
+      id: '/avis'
+      path: '/avis'
+      fullPath: '/avis'
+      preLoaderRoute: typeof AvisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +145,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$handle': {
+      id: '/product/$handle'
+      path: '/product/$handle'
+      fullPath: '/product/$handle'
+      preLoaderRoute: typeof ProductHandleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AvisRoute: AvisRoute,
+  CollectionsRoute: CollectionsRoute,
+  NotreHistoireRoute: NotreHistoireRoute,
+  PersonnalisationRoute: PersonnalisationRoute,
+  ProductHandleRoute: ProductHandleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
