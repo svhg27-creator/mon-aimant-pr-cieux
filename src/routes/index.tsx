@@ -64,6 +64,13 @@ function HomePage() {
         </div>
       </section>
 
+      {/* FAMILY CHIPS */}
+      <section className="max-w-7xl mx-auto px-6 pt-10">
+        <FamilyChips linkMode />
+      </section>
+
+
+
       {/* EDITORIAL COLLECTIONS */}
       <section className="max-w-7xl mx-auto px-6 pt-24 pb-8">
         <div className="flex items-end justify-between mb-10">
