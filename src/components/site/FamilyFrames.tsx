@@ -1,27 +1,22 @@
 import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { ImagePlus } from "lucide-react";
 import { FAMILIES } from "./FamilyChips";
-
-// Photo par famille — remplacez null par un import d'image pour afficher la photo.
-const FAMILY_PHOTOS: Record<string, string | null> = {
-  all: null,
-  prenoms: null,
-  animaux: null,
-  "drapeau-coeur": null,
-  message: null,
-  evenements: null,
-  "souvenir-photo": null,
-  hommage: null,
-  "fete-meres": null,
-  "saint-valentin": null,
-  "fin-annee": null,
-  "premiere-main": null,
-  logistique: null,
-  calendrier: null,
-};
+import { supabase } from "@/integrations/supabase/client";
 
 export function FamilyFrames() {
   const items = FAMILIES.filter((f) => f.id !== "all");
+
+  const { data: photos } = useQuery({
+    queryKey: ["family_photos"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("family_photos").select("family_id, photo_url");
+      if (error) return [];
+      return data ?? [];
+    },
+  });
+
+  const photoMap = new Map((photos ?? []).map((p) => [p.family_id, p.photo_url]));
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-16">
@@ -35,7 +30,7 @@ export function FamilyFrames() {
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {items.map((f) => {
-          const photo = FAMILY_PHOTOS[f.id];
+          const photo = photoMap.get(f.id);
           const Icon = f.icon;
           return (
             <Link
@@ -44,7 +39,6 @@ export function FamilyFrames() {
               search={{ famille: f.id }}
               className="group block"
             >
-              {/* Cadre photo style polaroid */}
               <div className="bg-background border border-border p-3 pb-5 shadow-sm hover:shadow-md transition-shadow">
                 <div className="aspect-square overflow-hidden bg-muted relative">
                   {photo ? (
@@ -58,7 +52,7 @@ export function FamilyFrames() {
                     <div className="absolute inset-0 grid place-items-center text-muted-foreground">
                       <div className="flex flex-col items-center gap-2">
                         <ImagePlus className="h-8 w-8" strokeWidth={1.2} />
-                        <span className="text-[11px] uppercase tracking-wider">Ajouter une photo</span>
+                        <span className="text-[11px] uppercase tracking-wider">Bientôt</span>
                       </div>
                     </div>
                   )}
