@@ -5,19 +5,6 @@ import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, type ShopifyProduct 
 import { Button } from "@/components/ui/button";
 import { FamilyChips } from "@/components/site/FamilyChips";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
-import collNaissance from "@/assets/collection-naissance.jpg";
-import collMariage from "@/assets/collection-mariage.jpg";
-import collMinimaliste from "@/assets/collection-minimaliste.jpg";
-import collDuo from "@/assets/collection-duo.jpg";
-
-export const Route = createFileRoute("/")({ component: HomePage });
-
-const editorial = [
-  { title: "Naissance", desc: "Capturez ses premiers jours", from: "À partir de 14,00 €", img: collNaissance },
-  { title: "Mariage", desc: "Le plus beau jour, pour toujours", from: "À partir de 18,00 €", img: collMariage },
-  { title: "Minimaliste", desc: "L'essentiel du design", from: "À partir de 12,00 €", img: collMinimaliste },
-  { title: "Duo", desc: "L'union fait le souvenir", from: "À partir de 22,00 €", img: collDuo },
-];
 
 function HomePage() {
   const { data, isLoading } = useQuery({
