@@ -5,19 +5,9 @@ import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, type ShopifyProduct 
 import { Button } from "@/components/ui/button";
 import { FamilyChips } from "@/components/site/FamilyChips";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
-import collNaissance from "@/assets/collection-naissance.jpg";
-import collMariage from "@/assets/collection-mariage.jpg";
-import collMinimaliste from "@/assets/collection-minimaliste.jpg";
-import collDuo from "@/assets/collection-duo.jpg";
 
 export const Route = createFileRoute("/")({ component: HomePage });
 
-const editorial = [
-  { title: "Naissance", desc: "Capturez ses premiers jours", from: "À partir de 14,00 €", img: collNaissance },
-  { title: "Mariage", desc: "Le plus beau jour, pour toujours", from: "À partir de 18,00 €", img: collMariage },
-  { title: "Minimaliste", desc: "L'essentiel du design", from: "À partir de 12,00 €", img: collMinimaliste },
-  { title: "Duo", desc: "L'union fait le souvenir", from: "À partir de 22,00 €", img: collDuo },
-];
 
 function HomePage() {
   const { data, isLoading } = useQuery({
@@ -67,39 +57,6 @@ function HomePage() {
       {/* FAMILY CHIPS */}
       <section className="max-w-7xl mx-auto px-6 pt-10">
         <FamilyChips linkMode />
-      </section>
-
-
-
-      {/* EDITORIAL COLLECTIONS */}
-      <section className="max-w-7xl mx-auto px-6 pt-24 pb-8">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="eyebrow">Inspirations</p>
-            <h2 className="font-display text-4xl mt-2">Nos Collections Phares</h2>
-          </div>
-          <Link to="/collections" className="text-sm text-primary hover:underline underline-offset-4 hidden md:inline">
-            Voir tout le catalogue →
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {editorial.map((c) => (
-            <Link
-              key={c.title}
-              to="/collections"
-              className="group"
-            >
-              <div className="aspect-square overflow-hidden bg-muted">
-                <img src={c.img} alt={c.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              </div>
-              <div className="pt-4">
-                <h3 className="font-display text-lg">{c.title}</h3>
-                <p className="text-sm text-muted-foreground">{c.desc}</p>
-                <p className="text-sm text-primary mt-1.5">{c.from}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
       </section>
 
       {/* 3 STEPS */}
