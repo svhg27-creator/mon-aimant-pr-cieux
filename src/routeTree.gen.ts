@@ -16,6 +16,7 @@ import { Route as AvisRouteImport } from './routes/avis'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
+import { Route as AdminPhotosRouteImport } from './routes/admin.photos'
 
 const PersonnalisationRoute = PersonnalisationRouteImport.update({
   id: '/personnalisation',
@@ -52,6 +53,11 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
   path: '/product/$handle',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPhotosRoute = AdminPhotosRouteImport.update({
+  id: '/admin/photos',
+  path: '/admin/photos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
+  '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
+  '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
+  '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/collections'
     | '/notre-histoire'
     | '/personnalisation'
+    | '/admin/photos'
     | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/collections'
     | '/notre-histoire'
     | '/personnalisation'
+    | '/admin/photos'
     | '/product/$handle'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/collections'
     | '/notre-histoire'
     | '/personnalisation'
+    | '/admin/photos'
     | '/product/$handle'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   CollectionsRoute: typeof CollectionsRoute
   NotreHistoireRoute: typeof NotreHistoireRoute
   PersonnalisationRoute: typeof PersonnalisationRoute
+  AdminPhotosRoute: typeof AdminPhotosRoute
   ProductHandleRoute: typeof ProductHandleRoute
 }
 
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductHandleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/photos': {
+      id: '/admin/photos'
+      path: '/admin/photos'
+      fullPath: '/admin/photos'
+      preLoaderRoute: typeof AdminPhotosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionsRoute: CollectionsRoute,
   NotreHistoireRoute: NotreHistoireRoute,
   PersonnalisationRoute: PersonnalisationRoute,
+  AdminPhotosRoute: AdminPhotosRoute,
   ProductHandleRoute: ProductHandleRoute,
 }
 export const routeTree = rootRouteImport
