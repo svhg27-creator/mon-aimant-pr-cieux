@@ -40,8 +40,11 @@ export function FamilyChips({ active, onSelect, linkMode = false }: Props) {
             <button
               key={f.id}
               onClick={() => {
-                if (linkMode) navigate({ to: "/collections", hash: f.id });
-                else onSelect?.(f.id);
+                if (linkMode) {
+                  navigate({ to: "/collections", search: { famille: f.id } });
+                } else {
+                  onSelect?.(f.id);
+                }
               }}
               className={cn(
                 "inline-flex items-center gap-2 px-4 h-10 border text-sm whitespace-nowrap transition-colors",
