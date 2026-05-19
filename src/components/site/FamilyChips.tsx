@@ -50,7 +50,7 @@ export function FamilyChips({ active, onSelect, linkMode = false }: Props) {
                 "inline-flex items-center gap-2 px-4 h-10 border text-sm whitespace-nowrap transition-colors",
                 isActive
                   ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-background text-foreground/80 border-border hover:border-primary/50 hover:text-primary font-extrabold",
+                  : "bg-background text-foreground/80 border-border hover:border-primary/50 hover:text-primary font-extrabold my-px",
               )}
             >
               <Icon className="h-3.5 w-3.5" strokeWidth={1.5} />
