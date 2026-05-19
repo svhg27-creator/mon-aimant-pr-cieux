@@ -47,28 +47,8 @@ function CollectionsPage() {
       </div>
 
       {/* Family chips */}
-      <div className="mb-12 -mx-6 px-6 overflow-x-auto">
-        <div className="flex gap-2 min-w-max pb-2">
-          {FAMILIES.map((f) => {
-            const Icon = f.icon;
-            const isActive = active === f.id;
-            return (
-              <button
-                key={f.id}
-                onClick={() => setActive(f.id)}
-                className={cn(
-                  "inline-flex items-center gap-2 px-4 h-10 border text-sm whitespace-nowrap transition-colors",
-                  isActive
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-background text-foreground/80 border-border hover:border-primary/50 hover:text-primary",
-                )}
-              >
-                <Icon className="h-3.5 w-3.5" strokeWidth={1.5} />
-                {f.label}
-              </button>
-            );
-          })}
-        </div>
+      <div className="mb-12">
+        <FamilyChips active={active} onSelect={setActive} />
       </div>
 
       {isLoading ? (
