@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { FamilyChips } from "@/components/site/FamilyChips";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 
+export const Route = createFileRoute("/")({ component: HomePage });
+
+
 function HomePage() {
   const { data, isLoading } = useQuery({
     queryKey: ["products", "home"],
