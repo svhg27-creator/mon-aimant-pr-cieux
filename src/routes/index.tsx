@@ -69,39 +69,6 @@ function HomePage() {
         <FamilyChips linkMode />
       </section>
 
-
-
-      {/* EDITORIAL COLLECTIONS */}
-      <section className="max-w-7xl mx-auto px-6 pt-24 pb-8">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="eyebrow">Inspirations</p>
-            <h2 className="font-display text-4xl mt-2">Nos Collections Phares</h2>
-          </div>
-          <Link to="/collections" className="text-sm text-primary hover:underline underline-offset-4 hidden md:inline">
-            Voir tout le catalogue →
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {editorial.map((c) => (
-            <Link
-              key={c.title}
-              to="/collections"
-              className="group"
-            >
-              <div className="aspect-square overflow-hidden bg-muted">
-                <img src={c.img} alt={c.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              </div>
-              <div className="pt-4">
-                <h3 className="font-display text-lg">{c.title}</h3>
-                <p className="text-sm text-muted-foreground">{c.desc}</p>
-                <p className="text-sm text-primary mt-1.5">{c.from}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       {/* 3 STEPS */}
       <section className="bg-secondary/40 mt-24 py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
