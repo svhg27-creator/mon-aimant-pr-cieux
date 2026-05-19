@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Sparkles, Magnet, Gift, Truck, Factory } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
+import { FamilyChips } from "@/components/site/FamilyChips";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import collNaissance from "@/assets/collection-naissance.jpg";
 import collMariage from "@/assets/collection-mariage.jpg";
@@ -62,6 +63,13 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* FAMILY CHIPS */}
+      <section className="max-w-7xl mx-auto px-6 pt-10">
+        <FamilyChips linkMode />
+      </section>
+
+
 
       {/* EDITORIAL COLLECTIONS */}
       <section className="max-w-7xl mx-auto px-6 pt-24 pb-8">
