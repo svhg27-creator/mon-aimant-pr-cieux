@@ -13,7 +13,6 @@ import { Route as PersonnalisationRouteImport } from './routes/personnalisation'
 import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
 import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as AvisRouteImport } from './routes/avis'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 
 const PersonnalisationRoute = PersonnalisationRouteImport.update({
@@ -36,11 +35,6 @@ const AvisRoute = AvisRouteImport.update({
   path: '/avis',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProductHandleRoute = ProductHandleRouteImport.update({
   id: '/product/$handle',
   path: '/product/$handle',
@@ -48,7 +42,6 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/avis': typeof AvisRoute
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
@@ -56,7 +49,6 @@ export interface FileRoutesByFullPath {
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/avis': typeof AvisRoute
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
@@ -65,7 +57,6 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/avis': typeof AvisRoute
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
@@ -75,7 +66,6 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/avis'
     | '/collections'
     | '/notre-histoire'
@@ -83,7 +73,6 @@ export interface FileRouteTypes {
     | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/avis'
     | '/collections'
     | '/notre-histoire'
@@ -91,7 +80,6 @@ export interface FileRouteTypes {
     | '/product/$handle'
   id:
     | '__root__'
-    | '/'
     | '/avis'
     | '/collections'
     | '/notre-histoire'
@@ -100,7 +88,6 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AvisRoute: typeof AvisRoute
   CollectionsRoute: typeof CollectionsRoute
   NotreHistoireRoute: typeof NotreHistoireRoute
@@ -138,13 +125,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AvisRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/product/$handle': {
       id: '/product/$handle'
       path: '/product/$handle'
@@ -156,7 +136,6 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AvisRoute: AvisRoute,
   CollectionsRoute: CollectionsRoute,
   NotreHistoireRoute: NotreHistoireRoute,
