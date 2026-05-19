@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Sparkles, Magnet, Gift, Truck, Factory } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
+import { FamilyChips } from "@/components/site/FamilyChips";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import collNaissance from "@/assets/collection-naissance.jpg";
 import collMariage from "@/assets/collection-mariage.jpg";
