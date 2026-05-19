@@ -1,11 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { z } from "zod";
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/site/ProductCard";
 import { FamilyChips, FAMILIES } from "@/components/site/FamilyChips";
 
+const familyIds = FAMILIES.map((f) => f.id) as [string, ...string[]];
+const searchSchema = z.object({
+  famille: fallback(z.enum(familyIds), "all").default("all"),
+});
+
 export const Route = createFileRoute("/collections")({
+  validateSearch: zodValidator(searchSchema),
   component: CollectionsPage,
   head: () => ({
     meta: [
@@ -16,7 +24,10 @@ export const Route = createFileRoute("/collections")({
 });
 
 function CollectionsPage() {
-  const [active, setActive] = useState("all");
+  const { famille: active } = Route.useSearch();
+  const navigate = useNavigate({ from: "/collections" });
+  const setActive = (id: string) => navigate({ search: { famille: id } });
+
 
   const { data, isLoading } = useQuery({
     queryKey: ["products", "all"],
