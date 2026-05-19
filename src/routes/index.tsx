@@ -60,6 +60,9 @@ function HomePage() {
         <FamilyChips linkMode />
       </section>
 
+      <FamilyFrames />
+
+
       {/* 3 STEPS */}
       <section className="bg-secondary/40 mt-24 py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
