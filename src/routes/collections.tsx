@@ -1,30 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import {
-  Sparkles, PawPrint, Heart, Flower2, PartyPopper, Image as ImageIcon,
-  Feather, Crown, HeartHandshake, Gift, Baby, Truck, CalendarDays,
-} from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/site/ProductCard";
-import { cn } from "@/lib/utils";
-
-const FAMILIES = [
-  { id: "all", label: "Tout", icon: Sparkles, tags: [] as string[] },
-  { id: "prenoms", label: "Fête des prénoms", icon: Sparkles, tags: ["prenom", "prénom", "fete-prenom"] },
-  { id: "animaux", label: "Animaux", icon: PawPrint, tags: ["animal", "animaux", "pet"] },
-  { id: "drapeau-coeur", label: "Drapeau cœur", icon: Heart, tags: ["drapeau", "coeur", "flag"] },
-  { id: "message", label: "Message fleur / Bouteille / Cadeau", icon: Flower2, tags: ["message", "fleur", "bouteille", "cadeau"] },
-  { id: "evenements", label: "Mariage · Baptême · Anniversaire", icon: PartyPopper, tags: ["mariage", "bapteme", "baptême", "anniversaire", "marque-table"] },
-  { id: "souvenir-photo", label: "Souvenir photo", icon: ImageIcon, tags: ["photo", "souvenir"] },
-  { id: "hommage", label: "Hommage", icon: Feather, tags: ["hommage", "memoriam"] },
-  { id: "fete-meres", label: "Fête des mères & grand-mères", icon: Crown, tags: ["fete-meres", "fête-mères", "grand-mere"] },
-  { id: "saint-valentin", label: "Saint-Valentin", icon: HeartHandshake, tags: ["saint-valentin", "valentin", "amour"] },
-  { id: "fin-annee", label: "Fêtes de fin d'année", icon: Gift, tags: ["noel", "noël", "nouvel-an", "fetes"] },
-  { id: "premiere-main", label: "1ère main", icon: Baby, tags: ["premiere-main", "naissance", "bebe"] },
-  { id: "logistique", label: "Logistique", icon: Truck, tags: ["logistique", "livraison", "frais-port"] },
-  { id: "calendrier", label: "Calendrier organisateur", icon: CalendarDays, tags: ["calendrier", "organisateur", "planner"] },
-];
+import { FamilyChips, FAMILIES } from "@/components/site/FamilyChips";
 
 export const Route = createFileRoute("/collections")({
   component: CollectionsPage,
