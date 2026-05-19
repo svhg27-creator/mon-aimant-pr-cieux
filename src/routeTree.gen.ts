@@ -13,8 +13,10 @@ import { Route as PersonnalisationRouteImport } from './routes/personnalisation'
 import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
 import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as AvisRouteImport } from './routes/avis'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
+import { Route as AdminPhotosRouteImport } from './routes/admin.photos'
 
 const PersonnalisationRoute = PersonnalisationRouteImport.update({
   id: '/personnalisation',
@@ -36,6 +38,11 @@ const AvisRoute = AvisRouteImport.update({
   path: '/avis',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -46,65 +53,84 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
   path: '/product/$handle',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPhotosRoute = AdminPhotosRouteImport.update({
+  id: '/admin/photos',
+  path: '/admin/photos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/avis': typeof AvisRoute
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
+  '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/avis': typeof AvisRoute
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
+  '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/avis': typeof AvisRoute
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
+  '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/avis'
     | '/collections'
     | '/notre-histoire'
     | '/personnalisation'
+    | '/admin/photos'
     | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/avis'
     | '/collections'
     | '/notre-histoire'
     | '/personnalisation'
+    | '/admin/photos'
     | '/product/$handle'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/avis'
     | '/collections'
     | '/notre-histoire'
     | '/personnalisation'
+    | '/admin/photos'
     | '/product/$handle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   AvisRoute: typeof AvisRoute
   CollectionsRoute: typeof CollectionsRoute
   NotreHistoireRoute: typeof NotreHistoireRoute
   PersonnalisationRoute: typeof PersonnalisationRoute
+  AdminPhotosRoute: typeof AdminPhotosRoute
   ProductHandleRoute: typeof ProductHandleRoute
 }
 
@@ -138,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AvisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -152,15 +185,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductHandleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/photos': {
+      id: '/admin/photos'
+      path: '/admin/photos'
+      fullPath: '/admin/photos'
+      preLoaderRoute: typeof AdminPhotosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   AvisRoute: AvisRoute,
   CollectionsRoute: CollectionsRoute,
   NotreHistoireRoute: NotreHistoireRoute,
   PersonnalisationRoute: PersonnalisationRoute,
+  AdminPhotosRoute: AdminPhotosRoute,
   ProductHandleRoute: ProductHandleRoute,
 }
 export const routeTree = rootRouteImport
