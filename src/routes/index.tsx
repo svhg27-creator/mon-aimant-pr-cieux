@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, Magnet, Gift, Truck, Factory } from "lucide-react
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
 import { FamilyChips } from "@/components/site/FamilyChips";
+import { FamilyFrames } from "@/components/site/FamilyFrames";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 
 export const Route = createFileRoute("/")({ component: HomePage });
