@@ -116,17 +116,25 @@ function FamilyPhotoCard({
   onChange: () => void;
 }) {
   const [uploading, setUploading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setSelectedFile(file);
+    setPreviewUrl(URL.createObjectURL(file));
+  };
+
+  const confirmUpload = async () => {
+    if (!selectedFile) return;
     setUploading(true);
     try {
-      const ext = file.name.split(".").pop() || "jpg";
+      const ext = selectedFile.name.split(".").pop() || "jpg";
       const path = `${familyId}-${Date.now()}.${ext}`;
       const { error: upErr } = await supabase.storage
         .from("family-photos")
-        .upload(path, file, { upsert: false, contentType: file.type });
+        .upload(path, selectedFile, { upsert: false, contentType: selectedFile.type });
       if (upErr) throw upErr;
 
       const { data: pub } = supabase.storage.from("family-photos").getPublicUrl(path);
@@ -144,8 +152,15 @@ function FamilyPhotoCard({
       toast.error(err.message || "Erreur upload");
     } finally {
       setUploading(false);
-      e.target.value = "";
+      setSelectedFile(null);
+      setPreviewUrl(null);
     }
+  };
+
+  const cancelPreview = () => {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    setPreviewUrl(null);
+    setSelectedFile(null);
   };
 
   const handleRemove = async () => {
@@ -163,33 +178,60 @@ function FamilyPhotoCard({
     }
   };
 
+  const displayUrl = previewUrl ?? photoUrl;
+  const hasPreview = !!previewUrl;
+
   return (
     <div className="bg-background border border-border p-3 pb-4">
       <div className="aspect-square bg-muted relative overflow-hidden">
-        {photoUrl ? (
-          <img src={photoUrl} alt={label} className="w-full h-full object-cover" />
+        {displayUrl ? (
+          <img src={displayUrl} alt={label} className="w-full h-full object-cover" />
         ) : (
           <div className="absolute inset-0 grid place-items-center text-muted-foreground text-xs">
             Aucune photo
           </div>
         )}
+        {hasPreview && (
+          <div className="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-1">
+            Aperçu
+          </div>
+        )}
       </div>
       <h3 className="font-display text-sm mt-3 text-center leading-tight min-h-[2.5rem]">{label}</h3>
       <div className="mt-3 flex gap-2">
-        <label className="flex-1">
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleUpload}
-            disabled={uploading}
-            className="hidden"
-          />
-          <span className="cursor-pointer inline-flex items-center justify-center gap-1 w-full h-9 border border-primary/40 text-primary text-xs hover:bg-primary/5 transition-colors">
-            <Upload className="h-3.5 w-3.5" />
-            {uploading ? "..." : photoUrl ? "Remplacer" : "Ajouter"}
-          </span>
-        </label>
-        {photoUrl && (
+        {!hasPreview ? (
+          <label className="flex-1">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileSelect}
+              disabled={uploading}
+              className="hidden"
+            />
+            <span className="cursor-pointer inline-flex items-center justify-center gap-1 w-full h-9 border border-primary/40 text-primary text-xs hover:bg-primary/5 transition-colors">
+              <Upload className="h-3.5 w-3.5" />
+              {photoUrl ? "Remplacer" : "Ajouter"}
+            </span>
+          </label>
+        ) : (
+          <>
+            <button
+              onClick={confirmUpload}
+              disabled={uploading}
+              className="flex-1 h-9 inline-flex items-center justify-center gap-1 bg-primary text-primary-foreground text-xs hover:bg-primary/90 transition-colors disabled:opacity-50"
+            >
+              {uploading ? "Envoi…" : "Confirmer"}
+            </button>
+            <button
+              onClick={cancelPreview}
+              disabled={uploading}
+              className="flex-1 h-9 inline-flex items-center justify-center gap-1 border border-border text-xs hover:bg-accent transition-colors disabled:opacity-50"
+            >
+              Annuler
+            </button>
+          </>
+        )}
+        {photoUrl && !hasPreview && (
           <button
             onClick={handleRemove}
             className="h-9 w-9 grid place-items-center border border-border hover:border-destructive hover:text-destructive transition-colors"
