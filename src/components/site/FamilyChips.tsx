@@ -1,7 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
 import {
   Sparkles, PawPrint, Heart, Flower2, PartyPopper, Image as ImageIcon,
-  Feather, Crown, HeartHandshake, Gift, Baby, Truck, CalendarDays,
+  Feather, Crown, HeartHandshake, Gift, Baby, Truck, CalendarDays, Flower,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
