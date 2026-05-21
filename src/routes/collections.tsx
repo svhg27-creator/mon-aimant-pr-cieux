@@ -1,8 +1,9 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
+import { PawPrint, ArrowRight } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/site/ProductCard";
 import { FamilyChips, FAMILIES } from "@/components/site/FamilyChips";
@@ -58,9 +59,23 @@ function CollectionsPage() {
       </div>
 
       {/* Family chips */}
-      <div className="mb-12">
+      <div className="mb-8">
         <FamilyChips active={active} onSelect={setActive} />
       </div>
+
+      {/* Sous-catégories Animaux */}
+      {active === "animaux" && (
+        <div className="mb-12 flex flex-wrap gap-3">
+          <Link
+            to="/catalogue/animaux/chats"
+            className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
+          >
+            <PawPrint className="h-4 w-4" strokeWidth={1.5} />
+            Voir le catalogue Chats (59 races)
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+      )}
 
       {isLoading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
