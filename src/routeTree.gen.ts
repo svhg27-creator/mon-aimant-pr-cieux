@@ -17,6 +17,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 import { Route as AdminPhotosRouteImport } from './routes/admin.photos'
+import { Route as CatalogueAnimauxChatsRouteImport } from './routes/catalogue.animaux.chats'
 
 const PersonnalisationRoute = PersonnalisationRouteImport.update({
   id: '/personnalisation',
@@ -58,6 +59,11 @@ const AdminPhotosRoute = AdminPhotosRouteImport.update({
   path: '/admin/photos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogueAnimauxChatsRoute = CatalogueAnimauxChatsRouteImport.update({
+  id: '/catalogue/animaux/chats',
+  path: '/catalogue/animaux/chats',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/personnalisation': typeof PersonnalisationRoute
   '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByTo {
   '/personnalisation': typeof PersonnalisationRoute
   '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +97,7 @@ export interface FileRoutesById {
   '/personnalisation': typeof PersonnalisationRoute
   '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +110,7 @@ export interface FileRouteTypes {
     | '/personnalisation'
     | '/admin/photos'
     | '/product/$handle'
+    | '/catalogue/animaux/chats'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +121,7 @@ export interface FileRouteTypes {
     | '/personnalisation'
     | '/admin/photos'
     | '/product/$handle'
+    | '/catalogue/animaux/chats'
   id:
     | '__root__'
     | '/'
@@ -121,6 +132,7 @@ export interface FileRouteTypes {
     | '/personnalisation'
     | '/admin/photos'
     | '/product/$handle'
+    | '/catalogue/animaux/chats'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +144,7 @@ export interface RootRouteChildren {
   PersonnalisationRoute: typeof PersonnalisationRoute
   AdminPhotosRoute: typeof AdminPhotosRoute
   ProductHandleRoute: typeof ProductHandleRoute
+  CatalogueAnimauxChatsRoute: typeof CatalogueAnimauxChatsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPhotosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogue/animaux/chats': {
+      id: '/catalogue/animaux/chats'
+      path: '/catalogue/animaux/chats'
+      fullPath: '/catalogue/animaux/chats'
+      preLoaderRoute: typeof CatalogueAnimauxChatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -204,6 +224,7 @@ const rootRouteChildren: RootRouteChildren = {
   PersonnalisationRoute: PersonnalisationRoute,
   AdminPhotosRoute: AdminPhotosRoute,
   ProductHandleRoute: ProductHandleRoute,
+  CatalogueAnimauxChatsRoute: CatalogueAnimauxChatsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
