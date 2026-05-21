@@ -18,6 +18,7 @@ export const FAMILIES = [
   { id: "saint-valentin", label: "Saint-Valentin", icon: HeartHandshake, tags: ["saint-valentin", "valentin", "amour"] },
   { id: "fin-annee", label: "Fêtes de fin d'année", icon: Gift, tags: ["noel", "noël", "nouvel-an", "fetes"] },
   { id: "premiere-main", label: "1ère main", icon: Baby, tags: ["premiere-main", "naissance", "bebe"] },
+  { id: "premier-mai", label: "1er Mai", icon: Flower, tags: ["premier-mai", "1er-mai", "muguet"] },
   { id: "logistique", label: "Logistique", icon: Truck, tags: ["logistique", "livraison", "frais-port"] },
   { id: "calendrier", label: "Calendrier organisateur", icon: CalendarDays, tags: ["calendrier", "organisateur", "planner"] },
 ];
