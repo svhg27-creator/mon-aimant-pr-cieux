@@ -1,0 +1,73 @@
+export interface Prenom {
+  id: number;
+  prenom: string;
+  genre: "fille" | "garçon";
+  origine: string;
+  signification: string;
+  photo?: string;
+}
+
+export const PRENOMS: Prenom[] = [
+  // FILLES
+  { id: 1, prenom: "Emma", genre: "fille", origine: "Germanique", signification: "Universelle, entière" },
+  { id: 2, prenom: "Jade", genre: "fille", origine: "Espagnole", signification: "Pierre précieuse" },
+  { id: 3, prenom: "Louise", genre: "fille", origine: "Germanique", signification: "Guerrière célèbre" },
+  { id: 4, prenom: "Alice", genre: "fille", origine: "Germanique", signification: "Noble, de haute lignée" },
+  { id: 5, prenom: "Chloé", genre: "fille", origine: "Grecque", signification: "Jeune pousse, verdoyante" },
+  { id: 6, prenom: "Lina", genre: "fille", origine: "Arabe", signification: "Délicate, tendre" },
+  { id: 7, prenom: "Mila", genre: "fille", origine: "Slave", signification: "Gracieuse, aimable" },
+  { id: 8, prenom: "Léa", genre: "fille", origine: "Hébraïque", signification: "Fatiguée, mais aussi dévouée" },
+  { id: 9, prenom: "Rose", genre: "fille", origine: "Latine", signification: "Fleur de rose" },
+  { id: 10, prenom: "Anna", genre: "fille", origine: "Hébraïque", signification: "Gracieuse, miséricordieuse" },
+  { id: 11, prenom: "Zoé", genre: "fille", origine: "Grecque", signification: "Vie" },
+  { id: 12, prenom: "Julia", genre: "fille", origine: "Latine", signification: "Jeune, joueuse" },
+  { id: 13, prenom: "Léna", genre: "fille", origine: "Grecque", signification: "Lumière, rayon" },
+  { id: 14, prenom: "Inès", genre: "fille", origine: "Grecque", signification: "Pure, chaste" },
+  { id: 15, prenom: "Lola", genre: "fille", origine: "Espagnole", signification: "Douleur (fondamentalement nostalgie)" },
+  { id: 16, prenom: "Manon", genre: "fille", origine: "Hébraïque", signification: "Grâce de Dieu" },
+  { id: 17, prenom: "Sarah", genre: "fille", origine: "Hébraïque", signification: "Princesse, reine" },
+  { id: 18, prenom: "Lucie", genre: "fille", origine: "Latine", signification: "Lumière, lumineuse" },
+  { id: 19, prenom: "Eva", genre: "fille", origine: "Hébraïque", signification: "Vivante, pleine de vie" },
+  { id: 20, prenom: "Camille", genre: "fille", origine: "Latine", signification: "Jeune serviteur" },
+  { id: 21, prenom: "Ambre", genre: "fille", origine: "Arabe", signification: "Résine précieuse" },
+  { id: 22, prenom: "Nina", genre: "fille", origine: "Espagnole", signification: "Petite fille" },
+  { id: 23, prenom: "Léonie", genre: "fille", origine: "Grecque", signification: "Lionne" },
+  { id: 24, prenom: "Maëlys", genre: "fille", origine: "Bretonne", signification: "Princesse" },
+  { id: 25, prenom: "Clara", genre: "fille", origine: "Latine", signification: "Claire, brillante" },
+  { id: 26, prenom: "Luna", genre: "fille", origine: "Latine", signification: "Lune" },
+  { id: 27, prenom: "Margaux", genre: "fille", origine: "Grecque", signification: "Perle" },
+  { id: 28, prenom: "Agathe", genre: "fille", origine: "Grecque", signification: "Bonne, excellente" },
+  { id: 29, prenom: "Charlotte", genre: "fille", origine: "Germanique", signification: "Femme, homme libre" },
+  { id: 30, prenom: "Victoria", genre: "fille", origine: "Latine", signification: "Victorieuse" },
+  // GARÇONS
+  { id: 31, prenom: "Gabriel", genre: "garçon", origine: "Hébraïque", signification: "Force de Dieu, héros de Dieu" },
+  { id: 32, prenom: "Léo", genre: "garçon", origine: "Latine", signification: "Lion" },
+  { id: 33, prenom: "Raphaël", genre: "garçon", origine: "Hébraïque", signification: "Dieu a guéri" },
+  { id: 34, prenom: "Louis", genre: "garçon", origine: "Germanique", signification: "Guerrier célèbre" },
+  { id: 35, prenom: "Jules", genre: "garçon", origine: "Latine", signification: "Jeune, délicat" },
+  { id: 36, prenom: "Arthur", genre: "garçon", origine: "Celte", signification: "Ours, chef fort" },
+  { id: 37, prenom: "Noah", genre: "garçon", origine: "Hébraïque", signification: "Repos, consolation" },
+  { id: 38, prenom: "Lucas", genre: "garçon", origine: "Grecque", signification: "Lumière, lumineux" },
+  { id: 39, prenom: "Adam", genre: "garçon", origine: "Hébraïque", signification: "Homme, formé de la terre" },
+  { id: 40, prenom: "Ethan", genre: "garçon", origine: "Hébraïque", signification: "Fort, ferme" },
+  { id: 41, prenom: "Hugo", genre: "garçon", origine: "Germanique", signification: "Intelligent, esprit" },
+  { id: 42, prenom: "Nathan", genre: "garçon", origine: "Hébraïque", signification: "Il a donné" },
+  { id: 43, prenom: "Tom", genre: "garçon", origine: "Araméen", signification: "Jumeau" },
+  { id: 44, prenom: "Sacha", genre: "garçon", origine: "Grecque", signification: "Défenseur des hommes" },
+  { id: 45, prenom: "Théo", genre: "garçon", origine: "Grecque", signification: "Don de Dieu" },
+  { id: 46, prenom: "Mathis", genre: "garçon", origine: "Grecque", signification: "Don de Dieu" },
+  { id: 47, prenom: "Enzo", genre: "garçon", origine: "Espagnole", signification: "Seigneur de la maison" },
+  { id: 48, prenom: "Timéo", genre: "garçon", origine: "Grecque", signification: "Honorer Dieu" },
+  { id: 49, prenom: "Mael", genre: "garçon", origine: "Bretonne", signification: "Prince, chef" },
+  { id: 50, prenom: "Liam", genre: "garçon", origine: "Germanique", signification: "Protecteur, volonté" },
+  { id: 51, prenom: "Aaron", genre: "garçon", origine: "Hébraïque", signification: "Montagne, élevé" },
+  { id: 52, prenom: "Nolan", genre: "garçon", origine: "Irlandaise", signification: "Descendant des champions" },
+  { id: 53, prenom: "Thibault", genre: "garçon", origine: "Germanique", signification: "Courageux, brave" },
+  { id: 54, prenom: "Noa", genre: "garçon", origine: "Hébraïque", signification: "Repos, consolation" },
+  { id: 55, prenom: "Maël", genre: "garçon", origine: "Bretonne", signification: "Prince, chef" },
+  { id: 56, prenom: "Maxime", genre: "garçon", origine: "Latine", signification: "Le plus grand" },
+  { id: 57, prenom: "Alexandre", genre: "garçon", origine: "Grecque", signification: "Protecteur des hommes" },
+  { id: 58, prenom: "Eliott", genre: "garçon", origine: "Hébraïque", signification: "Mon Dieu est l'Eternel" },
+  { id: 59, prenom: "Valentin", genre: "garçon", origine: "Latine", signification: "Fort, vigoureux" },
+  { id: 60, prenom: "Gabin", genre: "garçon", origine: "Latine", signification: "De la ville de Gabies" },
+];
