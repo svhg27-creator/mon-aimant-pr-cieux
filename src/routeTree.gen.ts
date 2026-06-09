@@ -17,6 +17,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 import { Route as AdminPhotosRouteImport } from './routes/admin.photos'
+import { Route as CataloguePrenomsFillesRouteImport } from './routes/catalogue.prenoms.filles'
 import { Route as CatalogueAnimauxChatsRouteImport } from './routes/catalogue.animaux.chats'
 
 const PersonnalisationRoute = PersonnalisationRouteImport.update({
@@ -59,6 +60,11 @@ const AdminPhotosRoute = AdminPhotosRouteImport.update({
   path: '/admin/photos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CataloguePrenomsFillesRoute = CataloguePrenomsFillesRouteImport.update({
+  id: '/catalogue/prenoms/filles',
+  path: '/catalogue/prenoms/filles',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogueAnimauxChatsRoute = CatalogueAnimauxChatsRouteImport.update({
   id: '/catalogue/animaux/chats',
   path: '/catalogue/animaux/chats',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
   '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
+  '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
   '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
+  '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
   '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
+  '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/admin/photos'
     | '/product/$handle'
     | '/catalogue/animaux/chats'
+    | '/catalogue/prenoms/filles'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/admin/photos'
     | '/product/$handle'
     | '/catalogue/animaux/chats'
+    | '/catalogue/prenoms/filles'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/admin/photos'
     | '/product/$handle'
     | '/catalogue/animaux/chats'
+    | '/catalogue/prenoms/filles'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   AdminPhotosRoute: typeof AdminPhotosRoute
   ProductHandleRoute: typeof ProductHandleRoute
   CatalogueAnimauxChatsRoute: typeof CatalogueAnimauxChatsRoute
+  CataloguePrenomsFillesRoute: typeof CataloguePrenomsFillesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -205,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPhotosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogue/prenoms/filles': {
+      id: '/catalogue/prenoms/filles'
+      path: '/catalogue/prenoms/filles'
+      fullPath: '/catalogue/prenoms/filles'
+      preLoaderRoute: typeof CataloguePrenomsFillesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogue/animaux/chats': {
       id: '/catalogue/animaux/chats'
       path: '/catalogue/animaux/chats'
@@ -225,7 +245,18 @@ const rootRouteChildren: RootRouteChildren = {
   AdminPhotosRoute: AdminPhotosRoute,
   ProductHandleRoute: ProductHandleRoute,
   CatalogueAnimauxChatsRoute: CatalogueAnimauxChatsRoute,
+  CataloguePrenomsFillesRoute: CataloguePrenomsFillesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
