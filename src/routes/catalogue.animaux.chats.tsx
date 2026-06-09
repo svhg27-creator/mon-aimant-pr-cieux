@@ -122,13 +122,13 @@ function ChatsPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
           {filtered.map((c) => (
             <article key={c.id} className="group">
-              <div className="aspect-square overflow-hidden bg-muted relative">
+              <div className="aspect-square overflow-hidden bg-white border border-border relative">
                 {c.photo ? (
                   <img
                     src={c.photo}
                     alt={c.race}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                    className="w-full h-full object-contain p-2 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                   />
                 ) : (
                   <div className="w-full h-full grid place-items-center text-muted-foreground">
