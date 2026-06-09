@@ -77,6 +77,28 @@ function CollectionsPage() {
         </div>
       )}
 
+      {/* Sous-catégories Fête des prénoms */}
+      {active === "prenoms" && (
+        <div className="mb-12 flex flex-wrap gap-3">
+          <Link
+            to="/catalogue/prenoms/filles"
+            className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
+          >
+            <Sparkles className="h-4 w-4" strokeWidth={1.5} />
+            Voir le catalogue Prénoms Filles (30 prénoms)
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+          <Link
+            to="/catalogue/prenoms/garcons"
+            className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
+          >
+            <Sparkles className="h-4 w-4" strokeWidth={1.5} />
+            Voir le catalogue Prénoms Garçons (30 prénoms)
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+      )}
+
       {isLoading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {Array.from({ length: 8 }).map((_, i) => (
