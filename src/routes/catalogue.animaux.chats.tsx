@@ -128,7 +128,7 @@ function ChatsPage() {
                     src={c.photo}
                     alt={c.race}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                    className="w-full h-full object-contain p-2 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                   />
                 ) : (
                   <div className="w-full h-full grid place-items-center text-muted-foreground">
