@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Sparkles, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { PRENOMS } from "@/data/prenoms";
-import { cn } from "@lib/utils";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/catalogue/prenoms/filles")({
   component: FillesPage,
