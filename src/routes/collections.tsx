@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { PawPrint, ArrowRight } from "lucide-react";
+import { PawPrint, ArrowRight, Sparkles } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/site/ProductCard";
 import { FamilyChips, FAMILIES } from "@/components/site/FamilyChips";
@@ -72,6 +72,28 @@ function CollectionsPage() {
           >
             <PawPrint className="h-4 w-4" strokeWidth={1.5} />
             Voir le catalogue Chats (59 races)
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+      )}
+
+      {/* Sous-catégories Fête des prénoms */}
+      {active === "prenoms" && (
+        <div className="mb-12 flex flex-wrap gap-3">
+          <Link
+            to="/catalogue/prenoms/filles"
+            className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
+          >
+            <Sparkles className="h-4 w-4" strokeWidth={1.5} />
+            Voir le catalogue Prénoms Filles (30 prénoms)
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+          <Link
+            to="/catalogue/prenoms/garcons"
+            className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
+          >
+            <Sparkles className="h-4 w-4" strokeWidth={1.5} />
+            Voir le catalogue Prénoms Garçons (30 prénoms)
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
