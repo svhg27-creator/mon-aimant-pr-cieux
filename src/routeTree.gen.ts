@@ -19,6 +19,11 @@ import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 import { Route as AdminPhotosRouteImport } from './routes/admin.photos'
 import { Route as CataloguePrenomsGarconsRouteImport } from './routes/catalogue.prenoms.garcons'
 import { Route as CataloguePrenomsFillesRouteImport } from './routes/catalogue.prenoms.filles'
+import { Route as CatalogueAnimauxRongeursRouteImport } from './routes/catalogue.animaux.rongeurs'
+import { Route as CatalogueAnimauxReptilesRouteImport } from './routes/catalogue.animaux.reptiles'
+import { Route as CatalogueAnimauxPoissonsRouteImport } from './routes/catalogue.animaux.poissons'
+import { Route as CatalogueAnimauxOiseauxRouteImport } from './routes/catalogue.animaux.oiseaux'
+import { Route as CatalogueAnimauxChiensRouteImport } from './routes/catalogue.animaux.chiens'
 import { Route as CatalogueAnimauxChatsRouteImport } from './routes/catalogue.animaux.chats'
 
 const PersonnalisationRoute = PersonnalisationRouteImport.update({
@@ -71,6 +76,34 @@ const CataloguePrenomsFillesRoute = CataloguePrenomsFillesRouteImport.update({
   path: '/catalogue/prenoms/filles',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogueAnimauxRongeursRoute =
+  CatalogueAnimauxRongeursRouteImport.update({
+    id: '/catalogue/animaux/rongeurs',
+    path: '/catalogue/animaux/rongeurs',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogueAnimauxReptilesRoute =
+  CatalogueAnimauxReptilesRouteImport.update({
+    id: '/catalogue/animaux/reptiles',
+    path: '/catalogue/animaux/reptiles',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogueAnimauxPoissonsRoute =
+  CatalogueAnimauxPoissonsRouteImport.update({
+    id: '/catalogue/animaux/poissons',
+    path: '/catalogue/animaux/poissons',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogueAnimauxOiseauxRoute = CatalogueAnimauxOiseauxRouteImport.update({
+  id: '/catalogue/animaux/oiseaux',
+  path: '/catalogue/animaux/oiseaux',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogueAnimauxChiensRoute = CatalogueAnimauxChiensRouteImport.update({
+  id: '/catalogue/animaux/chiens',
+  path: '/catalogue/animaux/chiens',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogueAnimauxChatsRoute = CatalogueAnimauxChatsRouteImport.update({
   id: '/catalogue/animaux/chats',
   path: '/catalogue/animaux/chats',
@@ -87,6 +120,11 @@ export interface FileRoutesByFullPath {
   '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
   '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
+  '/catalogue/animaux/chiens': typeof CatalogueAnimauxChiensRoute
+  '/catalogue/animaux/oiseaux': typeof CatalogueAnimauxOiseauxRoute
+  '/catalogue/animaux/poissons': typeof CatalogueAnimauxPoissonsRoute
+  '/catalogue/animaux/reptiles': typeof CatalogueAnimauxReptilesRoute
+  '/catalogue/animaux/rongeurs': typeof CatalogueAnimauxRongeursRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
 }
@@ -100,6 +138,11 @@ export interface FileRoutesByTo {
   '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
   '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
+  '/catalogue/animaux/chiens': typeof CatalogueAnimauxChiensRoute
+  '/catalogue/animaux/oiseaux': typeof CatalogueAnimauxOiseauxRoute
+  '/catalogue/animaux/poissons': typeof CatalogueAnimauxPoissonsRoute
+  '/catalogue/animaux/reptiles': typeof CatalogueAnimauxReptilesRoute
+  '/catalogue/animaux/rongeurs': typeof CatalogueAnimauxRongeursRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
 }
@@ -114,6 +157,11 @@ export interface FileRoutesById {
   '/admin/photos': typeof AdminPhotosRoute
   '/product/$handle': typeof ProductHandleRoute
   '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
+  '/catalogue/animaux/chiens': typeof CatalogueAnimauxChiensRoute
+  '/catalogue/animaux/oiseaux': typeof CatalogueAnimauxOiseauxRoute
+  '/catalogue/animaux/poissons': typeof CatalogueAnimauxPoissonsRoute
+  '/catalogue/animaux/reptiles': typeof CatalogueAnimauxReptilesRoute
+  '/catalogue/animaux/rongeurs': typeof CatalogueAnimauxRongeursRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
 }
@@ -129,6 +177,11 @@ export interface FileRouteTypes {
     | '/admin/photos'
     | '/product/$handle'
     | '/catalogue/animaux/chats'
+    | '/catalogue/animaux/chiens'
+    | '/catalogue/animaux/oiseaux'
+    | '/catalogue/animaux/poissons'
+    | '/catalogue/animaux/reptiles'
+    | '/catalogue/animaux/rongeurs'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +195,11 @@ export interface FileRouteTypes {
     | '/admin/photos'
     | '/product/$handle'
     | '/catalogue/animaux/chats'
+    | '/catalogue/animaux/chiens'
+    | '/catalogue/animaux/oiseaux'
+    | '/catalogue/animaux/poissons'
+    | '/catalogue/animaux/reptiles'
+    | '/catalogue/animaux/rongeurs'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
   id:
@@ -155,6 +213,11 @@ export interface FileRouteTypes {
     | '/admin/photos'
     | '/product/$handle'
     | '/catalogue/animaux/chats'
+    | '/catalogue/animaux/chiens'
+    | '/catalogue/animaux/oiseaux'
+    | '/catalogue/animaux/poissons'
+    | '/catalogue/animaux/reptiles'
+    | '/catalogue/animaux/rongeurs'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
   fileRoutesById: FileRoutesById
@@ -169,6 +232,11 @@ export interface RootRouteChildren {
   AdminPhotosRoute: typeof AdminPhotosRoute
   ProductHandleRoute: typeof ProductHandleRoute
   CatalogueAnimauxChatsRoute: typeof CatalogueAnimauxChatsRoute
+  CatalogueAnimauxChiensRoute: typeof CatalogueAnimauxChiensRoute
+  CatalogueAnimauxOiseauxRoute: typeof CatalogueAnimauxOiseauxRoute
+  CatalogueAnimauxPoissonsRoute: typeof CatalogueAnimauxPoissonsRoute
+  CatalogueAnimauxReptilesRoute: typeof CatalogueAnimauxReptilesRoute
+  CatalogueAnimauxRongeursRoute: typeof CatalogueAnimauxRongeursRoute
   CataloguePrenomsFillesRoute: typeof CataloguePrenomsFillesRoute
   CataloguePrenomsGarconsRoute: typeof CataloguePrenomsGarconsRoute
 }
@@ -245,6 +313,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CataloguePrenomsFillesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogue/animaux/rongeurs': {
+      id: '/catalogue/animaux/rongeurs'
+      path: '/catalogue/animaux/rongeurs'
+      fullPath: '/catalogue/animaux/rongeurs'
+      preLoaderRoute: typeof CatalogueAnimauxRongeursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/animaux/reptiles': {
+      id: '/catalogue/animaux/reptiles'
+      path: '/catalogue/animaux/reptiles'
+      fullPath: '/catalogue/animaux/reptiles'
+      preLoaderRoute: typeof CatalogueAnimauxReptilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/animaux/poissons': {
+      id: '/catalogue/animaux/poissons'
+      path: '/catalogue/animaux/poissons'
+      fullPath: '/catalogue/animaux/poissons'
+      preLoaderRoute: typeof CatalogueAnimauxPoissonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/animaux/oiseaux': {
+      id: '/catalogue/animaux/oiseaux'
+      path: '/catalogue/animaux/oiseaux'
+      fullPath: '/catalogue/animaux/oiseaux'
+      preLoaderRoute: typeof CatalogueAnimauxOiseauxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/animaux/chiens': {
+      id: '/catalogue/animaux/chiens'
+      path: '/catalogue/animaux/chiens'
+      fullPath: '/catalogue/animaux/chiens'
+      preLoaderRoute: typeof CatalogueAnimauxChiensRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogue/animaux/chats': {
       id: '/catalogue/animaux/chats'
       path: '/catalogue/animaux/chats'
@@ -265,6 +368,11 @@ const rootRouteChildren: RootRouteChildren = {
   AdminPhotosRoute: AdminPhotosRoute,
   ProductHandleRoute: ProductHandleRoute,
   CatalogueAnimauxChatsRoute: CatalogueAnimauxChatsRoute,
+  CatalogueAnimauxChiensRoute: CatalogueAnimauxChiensRoute,
+  CatalogueAnimauxOiseauxRoute: CatalogueAnimauxOiseauxRoute,
+  CatalogueAnimauxPoissonsRoute: CatalogueAnimauxPoissonsRoute,
+  CatalogueAnimauxReptilesRoute: CatalogueAnimauxReptilesRoute,
+  CatalogueAnimauxRongeursRoute: CatalogueAnimauxRongeursRoute,
   CataloguePrenomsFillesRoute: CataloguePrenomsFillesRoute,
   CataloguePrenomsGarconsRoute: CataloguePrenomsGarconsRoute,
 }
