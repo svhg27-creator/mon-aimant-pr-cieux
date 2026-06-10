@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { PawPrint, ArrowRight, Sparkles } from "lucide-react";
+import { PawPrint, ArrowRight, Sparkles, Globe } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/site/ProductCard";
 import { FamilyChips, FAMILIES } from "@/components/site/FamilyChips";
@@ -106,6 +106,31 @@ function CollectionsPage() {
             Voir le catalogue Prénoms Garçons (30 prénoms)
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
+        </div>
+      )}
+
+      {/* Sous-catégories Drapeau cœur */}
+      {active === "drapeau-coeur" && (
+        <div className="mb-12 flex flex-wrap gap-3">
+          {[
+            { to: "/catalogue/drapeau-coeur/europe", label: "Europe" },
+            { to: "/catalogue/drapeau-coeur/asie", label: "Asie" },
+            { to: "/catalogue/drapeau-coeur/afrique", label: "Afrique" },
+            { to: "/catalogue/drapeau-coeur/amerique-nord", label: "Amérique du Nord" },
+            { to: "/catalogue/drapeau-coeur/amerique-sud", label: "Amérique du Sud" },
+            { to: "/catalogue/drapeau-coeur/oceanie", label: "Océanie" },
+            { to: "/catalogue/drapeau-coeur/autre", label: "Autre" },
+          ].map((s) => (
+            <Link
+              key={s.to}
+              to={s.to}
+              className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
+            >
+              <Globe className="h-4 w-4" strokeWidth={1.5} />
+              Catalogue {s.label}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          ))}
         </div>
       )}
 

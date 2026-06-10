@@ -19,6 +19,13 @@ import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 import { Route as AdminPhotosRouteImport } from './routes/admin.photos'
 import { Route as CataloguePrenomsGarconsRouteImport } from './routes/catalogue.prenoms.garcons'
 import { Route as CataloguePrenomsFillesRouteImport } from './routes/catalogue.prenoms.filles'
+import { Route as CatalogueDrapeauCoeurOceanieRouteImport } from './routes/catalogue.drapeau-coeur.oceanie'
+import { Route as CatalogueDrapeauCoeurEuropeRouteImport } from './routes/catalogue.drapeau-coeur.europe'
+import { Route as CatalogueDrapeauCoeurAutreRouteImport } from './routes/catalogue.drapeau-coeur.autre'
+import { Route as CatalogueDrapeauCoeurAsieRouteImport } from './routes/catalogue.drapeau-coeur.asie'
+import { Route as CatalogueDrapeauCoeurAmeriqueSudRouteImport } from './routes/catalogue.drapeau-coeur.amerique-sud'
+import { Route as CatalogueDrapeauCoeurAmeriqueNordRouteImport } from './routes/catalogue.drapeau-coeur.amerique-nord'
+import { Route as CatalogueDrapeauCoeurAfriqueRouteImport } from './routes/catalogue.drapeau-coeur.afrique'
 import { Route as CatalogueAnimauxRongeursRouteImport } from './routes/catalogue.animaux.rongeurs'
 import { Route as CatalogueAnimauxReptilesRouteImport } from './routes/catalogue.animaux.reptiles'
 import { Route as CatalogueAnimauxPoissonsRouteImport } from './routes/catalogue.animaux.poissons'
@@ -76,6 +83,48 @@ const CataloguePrenomsFillesRoute = CataloguePrenomsFillesRouteImport.update({
   path: '/catalogue/prenoms/filles',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogueDrapeauCoeurOceanieRoute =
+  CatalogueDrapeauCoeurOceanieRouteImport.update({
+    id: '/catalogue/drapeau-coeur/oceanie',
+    path: '/catalogue/drapeau-coeur/oceanie',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogueDrapeauCoeurEuropeRoute =
+  CatalogueDrapeauCoeurEuropeRouteImport.update({
+    id: '/catalogue/drapeau-coeur/europe',
+    path: '/catalogue/drapeau-coeur/europe',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogueDrapeauCoeurAutreRoute =
+  CatalogueDrapeauCoeurAutreRouteImport.update({
+    id: '/catalogue/drapeau-coeur/autre',
+    path: '/catalogue/drapeau-coeur/autre',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogueDrapeauCoeurAsieRoute =
+  CatalogueDrapeauCoeurAsieRouteImport.update({
+    id: '/catalogue/drapeau-coeur/asie',
+    path: '/catalogue/drapeau-coeur/asie',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogueDrapeauCoeurAmeriqueSudRoute =
+  CatalogueDrapeauCoeurAmeriqueSudRouteImport.update({
+    id: '/catalogue/drapeau-coeur/amerique-sud',
+    path: '/catalogue/drapeau-coeur/amerique-sud',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogueDrapeauCoeurAmeriqueNordRoute =
+  CatalogueDrapeauCoeurAmeriqueNordRouteImport.update({
+    id: '/catalogue/drapeau-coeur/amerique-nord',
+    path: '/catalogue/drapeau-coeur/amerique-nord',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogueDrapeauCoeurAfriqueRoute =
+  CatalogueDrapeauCoeurAfriqueRouteImport.update({
+    id: '/catalogue/drapeau-coeur/afrique',
+    path: '/catalogue/drapeau-coeur/afrique',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogueAnimauxRongeursRoute =
   CatalogueAnimauxRongeursRouteImport.update({
     id: '/catalogue/animaux/rongeurs',
@@ -125,6 +174,13 @@ export interface FileRoutesByFullPath {
   '/catalogue/animaux/poissons': typeof CatalogueAnimauxPoissonsRoute
   '/catalogue/animaux/reptiles': typeof CatalogueAnimauxReptilesRoute
   '/catalogue/animaux/rongeurs': typeof CatalogueAnimauxRongeursRoute
+  '/catalogue/drapeau-coeur/afrique': typeof CatalogueDrapeauCoeurAfriqueRoute
+  '/catalogue/drapeau-coeur/amerique-nord': typeof CatalogueDrapeauCoeurAmeriqueNordRoute
+  '/catalogue/drapeau-coeur/amerique-sud': typeof CatalogueDrapeauCoeurAmeriqueSudRoute
+  '/catalogue/drapeau-coeur/asie': typeof CatalogueDrapeauCoeurAsieRoute
+  '/catalogue/drapeau-coeur/autre': typeof CatalogueDrapeauCoeurAutreRoute
+  '/catalogue/drapeau-coeur/europe': typeof CatalogueDrapeauCoeurEuropeRoute
+  '/catalogue/drapeau-coeur/oceanie': typeof CatalogueDrapeauCoeurOceanieRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
 }
@@ -143,6 +199,13 @@ export interface FileRoutesByTo {
   '/catalogue/animaux/poissons': typeof CatalogueAnimauxPoissonsRoute
   '/catalogue/animaux/reptiles': typeof CatalogueAnimauxReptilesRoute
   '/catalogue/animaux/rongeurs': typeof CatalogueAnimauxRongeursRoute
+  '/catalogue/drapeau-coeur/afrique': typeof CatalogueDrapeauCoeurAfriqueRoute
+  '/catalogue/drapeau-coeur/amerique-nord': typeof CatalogueDrapeauCoeurAmeriqueNordRoute
+  '/catalogue/drapeau-coeur/amerique-sud': typeof CatalogueDrapeauCoeurAmeriqueSudRoute
+  '/catalogue/drapeau-coeur/asie': typeof CatalogueDrapeauCoeurAsieRoute
+  '/catalogue/drapeau-coeur/autre': typeof CatalogueDrapeauCoeurAutreRoute
+  '/catalogue/drapeau-coeur/europe': typeof CatalogueDrapeauCoeurEuropeRoute
+  '/catalogue/drapeau-coeur/oceanie': typeof CatalogueDrapeauCoeurOceanieRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
 }
@@ -162,6 +225,13 @@ export interface FileRoutesById {
   '/catalogue/animaux/poissons': typeof CatalogueAnimauxPoissonsRoute
   '/catalogue/animaux/reptiles': typeof CatalogueAnimauxReptilesRoute
   '/catalogue/animaux/rongeurs': typeof CatalogueAnimauxRongeursRoute
+  '/catalogue/drapeau-coeur/afrique': typeof CatalogueDrapeauCoeurAfriqueRoute
+  '/catalogue/drapeau-coeur/amerique-nord': typeof CatalogueDrapeauCoeurAmeriqueNordRoute
+  '/catalogue/drapeau-coeur/amerique-sud': typeof CatalogueDrapeauCoeurAmeriqueSudRoute
+  '/catalogue/drapeau-coeur/asie': typeof CatalogueDrapeauCoeurAsieRoute
+  '/catalogue/drapeau-coeur/autre': typeof CatalogueDrapeauCoeurAutreRoute
+  '/catalogue/drapeau-coeur/europe': typeof CatalogueDrapeauCoeurEuropeRoute
+  '/catalogue/drapeau-coeur/oceanie': typeof CatalogueDrapeauCoeurOceanieRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
 }
@@ -182,6 +252,13 @@ export interface FileRouteTypes {
     | '/catalogue/animaux/poissons'
     | '/catalogue/animaux/reptiles'
     | '/catalogue/animaux/rongeurs'
+    | '/catalogue/drapeau-coeur/afrique'
+    | '/catalogue/drapeau-coeur/amerique-nord'
+    | '/catalogue/drapeau-coeur/amerique-sud'
+    | '/catalogue/drapeau-coeur/asie'
+    | '/catalogue/drapeau-coeur/autre'
+    | '/catalogue/drapeau-coeur/europe'
+    | '/catalogue/drapeau-coeur/oceanie'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
   fileRoutesByTo: FileRoutesByTo
@@ -200,6 +277,13 @@ export interface FileRouteTypes {
     | '/catalogue/animaux/poissons'
     | '/catalogue/animaux/reptiles'
     | '/catalogue/animaux/rongeurs'
+    | '/catalogue/drapeau-coeur/afrique'
+    | '/catalogue/drapeau-coeur/amerique-nord'
+    | '/catalogue/drapeau-coeur/amerique-sud'
+    | '/catalogue/drapeau-coeur/asie'
+    | '/catalogue/drapeau-coeur/autre'
+    | '/catalogue/drapeau-coeur/europe'
+    | '/catalogue/drapeau-coeur/oceanie'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
   id:
@@ -218,6 +302,13 @@ export interface FileRouteTypes {
     | '/catalogue/animaux/poissons'
     | '/catalogue/animaux/reptiles'
     | '/catalogue/animaux/rongeurs'
+    | '/catalogue/drapeau-coeur/afrique'
+    | '/catalogue/drapeau-coeur/amerique-nord'
+    | '/catalogue/drapeau-coeur/amerique-sud'
+    | '/catalogue/drapeau-coeur/asie'
+    | '/catalogue/drapeau-coeur/autre'
+    | '/catalogue/drapeau-coeur/europe'
+    | '/catalogue/drapeau-coeur/oceanie'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
   fileRoutesById: FileRoutesById
@@ -237,6 +328,13 @@ export interface RootRouteChildren {
   CatalogueAnimauxPoissonsRoute: typeof CatalogueAnimauxPoissonsRoute
   CatalogueAnimauxReptilesRoute: typeof CatalogueAnimauxReptilesRoute
   CatalogueAnimauxRongeursRoute: typeof CatalogueAnimauxRongeursRoute
+  CatalogueDrapeauCoeurAfriqueRoute: typeof CatalogueDrapeauCoeurAfriqueRoute
+  CatalogueDrapeauCoeurAmeriqueNordRoute: typeof CatalogueDrapeauCoeurAmeriqueNordRoute
+  CatalogueDrapeauCoeurAmeriqueSudRoute: typeof CatalogueDrapeauCoeurAmeriqueSudRoute
+  CatalogueDrapeauCoeurAsieRoute: typeof CatalogueDrapeauCoeurAsieRoute
+  CatalogueDrapeauCoeurAutreRoute: typeof CatalogueDrapeauCoeurAutreRoute
+  CatalogueDrapeauCoeurEuropeRoute: typeof CatalogueDrapeauCoeurEuropeRoute
+  CatalogueDrapeauCoeurOceanieRoute: typeof CatalogueDrapeauCoeurOceanieRoute
   CataloguePrenomsFillesRoute: typeof CataloguePrenomsFillesRoute
   CataloguePrenomsGarconsRoute: typeof CataloguePrenomsGarconsRoute
 }
@@ -313,6 +411,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CataloguePrenomsFillesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogue/drapeau-coeur/oceanie': {
+      id: '/catalogue/drapeau-coeur/oceanie'
+      path: '/catalogue/drapeau-coeur/oceanie'
+      fullPath: '/catalogue/drapeau-coeur/oceanie'
+      preLoaderRoute: typeof CatalogueDrapeauCoeurOceanieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/drapeau-coeur/europe': {
+      id: '/catalogue/drapeau-coeur/europe'
+      path: '/catalogue/drapeau-coeur/europe'
+      fullPath: '/catalogue/drapeau-coeur/europe'
+      preLoaderRoute: typeof CatalogueDrapeauCoeurEuropeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/drapeau-coeur/autre': {
+      id: '/catalogue/drapeau-coeur/autre'
+      path: '/catalogue/drapeau-coeur/autre'
+      fullPath: '/catalogue/drapeau-coeur/autre'
+      preLoaderRoute: typeof CatalogueDrapeauCoeurAutreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/drapeau-coeur/asie': {
+      id: '/catalogue/drapeau-coeur/asie'
+      path: '/catalogue/drapeau-coeur/asie'
+      fullPath: '/catalogue/drapeau-coeur/asie'
+      preLoaderRoute: typeof CatalogueDrapeauCoeurAsieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/drapeau-coeur/amerique-sud': {
+      id: '/catalogue/drapeau-coeur/amerique-sud'
+      path: '/catalogue/drapeau-coeur/amerique-sud'
+      fullPath: '/catalogue/drapeau-coeur/amerique-sud'
+      preLoaderRoute: typeof CatalogueDrapeauCoeurAmeriqueSudRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/drapeau-coeur/amerique-nord': {
+      id: '/catalogue/drapeau-coeur/amerique-nord'
+      path: '/catalogue/drapeau-coeur/amerique-nord'
+      fullPath: '/catalogue/drapeau-coeur/amerique-nord'
+      preLoaderRoute: typeof CatalogueDrapeauCoeurAmeriqueNordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/drapeau-coeur/afrique': {
+      id: '/catalogue/drapeau-coeur/afrique'
+      path: '/catalogue/drapeau-coeur/afrique'
+      fullPath: '/catalogue/drapeau-coeur/afrique'
+      preLoaderRoute: typeof CatalogueDrapeauCoeurAfriqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogue/animaux/rongeurs': {
       id: '/catalogue/animaux/rongeurs'
       path: '/catalogue/animaux/rongeurs'
@@ -373,9 +520,27 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogueAnimauxPoissonsRoute: CatalogueAnimauxPoissonsRoute,
   CatalogueAnimauxReptilesRoute: CatalogueAnimauxReptilesRoute,
   CatalogueAnimauxRongeursRoute: CatalogueAnimauxRongeursRoute,
+  CatalogueDrapeauCoeurAfriqueRoute: CatalogueDrapeauCoeurAfriqueRoute,
+  CatalogueDrapeauCoeurAmeriqueNordRoute:
+    CatalogueDrapeauCoeurAmeriqueNordRoute,
+  CatalogueDrapeauCoeurAmeriqueSudRoute: CatalogueDrapeauCoeurAmeriqueSudRoute,
+  CatalogueDrapeauCoeurAsieRoute: CatalogueDrapeauCoeurAsieRoute,
+  CatalogueDrapeauCoeurAutreRoute: CatalogueDrapeauCoeurAutreRoute,
+  CatalogueDrapeauCoeurEuropeRoute: CatalogueDrapeauCoeurEuropeRoute,
+  CatalogueDrapeauCoeurOceanieRoute: CatalogueDrapeauCoeurOceanieRoute,
   CataloguePrenomsFillesRoute: CataloguePrenomsFillesRoute,
   CataloguePrenomsGarconsRoute: CataloguePrenomsGarconsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
