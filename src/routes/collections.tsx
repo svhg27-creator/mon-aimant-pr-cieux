@@ -109,6 +109,31 @@ function CollectionsPage() {
         </div>
       )}
 
+      {/* Sous-catégories Drapeau cœur */}
+      {active === "drapeau-coeur" && (
+        <div className="mb-12 flex flex-wrap gap-3">
+          {[
+            { to: "/catalogue/drapeau-coeur/europe", label: "Europe" },
+            { to: "/catalogue/drapeau-coeur/asie", label: "Asie" },
+            { to: "/catalogue/drapeau-coeur/afrique", label: "Afrique" },
+            { to: "/catalogue/drapeau-coeur/amerique-nord", label: "Amérique du Nord" },
+            { to: "/catalogue/drapeau-coeur/amerique-sud", label: "Amérique du Sud" },
+            { to: "/catalogue/drapeau-coeur/oceanie", label: "Océanie" },
+            { to: "/catalogue/drapeau-coeur/autre", label: "Autre" },
+          ].map((s) => (
+            <Link
+              key={s.to}
+              to={s.to}
+              className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
+            >
+              <Globe className="h-4 w-4" strokeWidth={1.5} />
+              Catalogue {s.label}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          ))}
+        </div>
+      )}
+
       {isLoading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {Array.from({ length: 8 }).map((_, i) => (
