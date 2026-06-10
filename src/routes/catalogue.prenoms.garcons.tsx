@@ -4,6 +4,7 @@ import { Sparkles, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { PRENOMS } from "@/data/prenoms";
 import { cn } from "@/lib/utils";
+import heroMagnet from "@/assets/magnet-fabio.jpeg.asset.json";
 
 export const Route = createFileRoute("/catalogue/prenoms/garcons")({
   component: GarconsPage,
