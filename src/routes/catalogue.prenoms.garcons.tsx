@@ -4,6 +4,7 @@ import { Sparkles, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { PRENOMS } from "@/data/prenoms";
 import { cn } from "@/lib/utils";
+import heroMagnet from "@/assets/magnet-fabio.jpeg.asset.json";
 
 export const Route = createFileRoute("/catalogue/prenoms/garcons")({
   component: GarconsPage,
@@ -72,7 +73,14 @@ function GarconsPage() {
           Catalogue Fête des prénoms
         </p>
         <h1 className="font-display text-5xl mt-3">Prénoms Garçons</h1>
-        <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
+        <div className="mt-8 mx-auto max-w-sm aspect-square bg-white border border-border overflow-hidden">
+          <img
+            src={heroMagnet.url}
+            alt="Magnet prénom personnalisé garçon — exemple Fabio"
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <p className="text-muted-foreground mt-6 max-w-xl mx-auto">
           {prenoms.length} prénoms garçons référencés — choisissez un prénom pour personnaliser votre magnet
           photo.
         </p>
