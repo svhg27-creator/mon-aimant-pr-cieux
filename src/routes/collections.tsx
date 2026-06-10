@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { PawPrint, ArrowRight, Sparkles } from "lucide-react";
+import { PawPrint, ArrowRight, Sparkles, Globe } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/site/ProductCard";
 import { FamilyChips, FAMILIES } from "@/components/site/FamilyChips";
