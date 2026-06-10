@@ -66,14 +66,24 @@ function CollectionsPage() {
       {/* Sous-catégories Animaux */}
       {active === "animaux" && (
         <div className="mb-12 flex flex-wrap gap-3">
-          <Link
-            to="/catalogue/animaux/chats"
-            className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
-          >
-            <PawPrint className="h-4 w-4" strokeWidth={1.5} />
-            Voir le catalogue Chats (59 races)
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+          {[
+            { to: "/catalogue/animaux/chats", label: "Chats" },
+            { to: "/catalogue/animaux/chiens", label: "Chiens" },
+            { to: "/catalogue/animaux/rongeurs", label: "Rongeurs" },
+            { to: "/catalogue/animaux/oiseaux", label: "Oiseaux" },
+            { to: "/catalogue/animaux/poissons", label: "Poissons" },
+            { to: "/catalogue/animaux/reptiles", label: "Reptiles" },
+          ].map((s) => (
+            <Link
+              key={s.to}
+              to={s.to}
+              className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
+            >
+              <PawPrint className="h-4 w-4" strokeWidth={1.5} />
+              Catalogue {s.label}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          ))}
         </div>
       )}
 
