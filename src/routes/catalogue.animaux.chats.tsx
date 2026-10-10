@@ -1,9 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { PawPrint, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useCatalogueAnimaux, type CatalogueItem } from "@/hooks/useCatalogueAnimaux";
+import { CatalogueBuyBar } from "@/components/CatalogueBuyBar";
 import { CHATS } from "@/data/chats";
-import { cn } from "@/lib/utils";
+
+// Catalogue local : images dans public/catalogue/animaux/chats/
+const NB_IMAGES_CHATS = 62;
+const CHATS_LOCAUX: CatalogueItem[] = Array.from({ length: NB_IMAGES_CHATS }, (_, i) => {
+  const n = String(i + 1).padStart(3, "0");
+  return {
+    id: i + 1,
+    espece: "chat",
+    nom: CHATS[i]?.race ?? `Chat ${i + 1}`,
+    photo_url: `/catalogue/animaux/chats/chat-${n}.png`,
+    image_name: `chat-${n}.png`,
+    image_index: i + 1,
+    bucket_name: "local",
+    active: true,
+  };
+});
 
 export const Route = createFileRoute("/catalogue/animaux/chats")({
   component: ChatsPage,
@@ -13,47 +30,31 @@ export const Route = createFileRoute("/catalogue/animaux/chats")({
       {
         name: "description",
         content:
-          "Catalogue de 59 races de chats avec photo et couleur — magnets photo personnalisés Mémora.",
+          "Catalogue de 62 races de chats avec photo et couleur — magnets photo personnalisés Mémora.",
       },
       { property: "og:title", content: "Chats — Catalogue Animaux | Mémora" },
       {
         property: "og:description",
-        content: "59 races de chats référencées pour vos magnets personnalisés.",
+        content: "62 races de chats référencées pour vos magnets personnalisés.",
       },
     ],
   }),
 });
 
-const COULEURS = [
-  "Toutes",
-  "Blanc",
-  "Noir",
-  "Gris",
-  "Bleu",
-  "Roux",
-  "Crème",
-  "Marron",
-  "Tigré",
-  "Bicolore",
-  "Tricolore",
-];
-
 function ChatsPage() {
   const [q, setQ] = useState("");
-  const [couleur, setCouleur] = useState("Toutes");
+  const { items: remote, loading } = useCatalogueAnimaux("chat");
+  const items = remote.length > 0 ? remote : CHATS_LOCAUX;
 
-  const filtered = useMemo(() => {
-    const needle = q.trim().toLowerCase();
-    return CHATS.filter((c) => {
-      if (couleur !== "Toutes" && c.couleur !== couleur) return false;
-      if (needle && !c.race.toLowerCase().includes(needle)) return false;
-      return true;
-    });
-  }, [q, couleur]);
+  const filtered = items.filter((c) => {
+    const race = CHATS[c.image_index - 1]?.race ?? "";
+    const search = q.trim().toLowerCase();
+    if (search === "") return true;
+    return c.nom.toLowerCase().includes(search) || race.toLowerCase().includes(search);
+  });
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-16">
-      {/* Breadcrumb */}
       <nav className="text-xs text-muted-foreground mb-6 flex items-center gap-2">
         <Link to="/" className="hover:text-primary">Accueil</Link>
         <span>/</span>
@@ -71,87 +72,66 @@ function ChatsPage() {
         </p>
         <h1 className="font-display text-5xl mt-3">Chats</h1>
         <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-          {CHATS.length} races référencées — choisissez votre compagnon pour le décliner en magnet
-          photo personnalisé.
+          {items.length} visuels référencés — choisissez votre compagnon pour le décliner en magnet photo personnalisé.
         </p>
       </div>
 
-      {/* Filtres */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
-        <div className="relative flex-1">
+        <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Rechercher une race…"
+            placeholder="Rechercher…"
             className="pl-9 h-11"
           />
         </div>
-        <div className="-mx-6 px-6 overflow-x-auto">
-          <div className="flex gap-2 min-w-max">
-            {COULEURS.map((c) => {
-              const active = couleur === c;
-              return (
-                <button
-                  key={c}
-                  onClick={() => setCouleur(c)}
-                  className={cn(
-                    "px-3 h-11 border text-xs whitespace-nowrap transition-colors",
-                    active
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-background text-foreground/80 border-border hover:border-primary/50 hover:text-primary",
-                  )}
-                >
-                  {c}
-                </button>
-              );
-            })}
-          </div>
-        </div>
       </div>
 
-      {/* Grille */}
-      {filtered.length === 0 ? (
+      {loading ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className="aspect-square bg-muted animate-pulse" />
+          ))}
+        </div>
+      ) : filtered.length === 0 ? (
         <div className="text-center py-16 border border-dashed">
-          <h3 className="font-display text-2xl">Aucune race trouvée</h3>
-          <p className="text-sm text-muted-foreground mt-2">
-            Essayez d'autres mots-clés ou couleurs.
-          </p>
+          <h3 className="font-display text-2xl">Aucun résultat</h3>
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-          {filtered.map((c) => (
-            <article key={c.id} className="group">
-              <div className="aspect-square overflow-hidden bg-white border border-border relative">
-                {c.photo ? (
+          {filtered.map((c) => {
+            const race = CHATS[c.image_index - 1]?.race ?? c.nom;
+            return (
+              <article key={c.id} className="group">
+                <div className="aspect-square overflow-hidden bg-white border border-border">
                   <img
-                    src={c.photo}
-                    alt={c.race}
+                    src={c.photo_url}
+                    alt={race}
                     loading="lazy"
                     className="w-full h-full object-contain p-2 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                   />
-                ) : (
-                  <div className="w-full h-full grid place-items-center text-muted-foreground">
-                    <PawPrint className="h-10 w-10 opacity-30" strokeWidth={1.25} />
-                  </div>
-                )}
-                <span className="absolute top-2 left-2 text-[10px] tracking-widest uppercase bg-background/80 backdrop-blur px-2 py-1 border border-border">
-                  N°{String(c.id).padStart(3, "0")}
-                </span>
-              </div>
-              <div className="pt-4">
-                <h3 className="font-display text-lg leading-tight group-hover:text-primary transition-colors">
-                  {c.race}
-                </h3>
-                <p className="text-sm text-muted-foreground mt-1">{c.couleur}</p>
-              </div>
-            </article>
-          ))}
+                </div>
+                <div className="pt-4 text-center">
+                  <h3 className="font-display text-lg leading-tight group-hover:text-primary transition-colors">
+                    {race}
+                  </h3>
+                  <CatalogueBuyBar
+                    variantKey={`catalogue-chat-${c.image_index}`}
+                    title={race}
+                    imageUrl={c.photo_url}
+                    shapeLabel="Carré 37×37 mm"
+                    unitPrice={4.5}
+                  />
+                </div>
+              </article>
+            );
+          })}
         </div>
       )}
 
       <p className="text-xs text-muted-foreground text-center mt-12">
-        Affichage : {filtered.length} / {CHATS.length} races
+        Affichage : {filtered.length} / {items.length}
       </p>
     </div>
   );

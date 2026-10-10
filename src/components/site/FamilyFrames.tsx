@@ -32,11 +32,12 @@ export function FamilyFrames() {
         {items.map((f) => {
           const photo = photoMap.get(f.id);
           const Icon = f.icon;
+          const isHommage = f.id === "hommage";
           return (
             <Link
               key={f.id}
-              to="/collections"
-              search={{ famille: f.id }}
+              to={isHommage ? "/catalogue/hommage" : "/collections"}
+              search={isHommage ? undefined : { famille: f.id }}
               className="group block"
             >
               <div className="bg-background border border-border p-3 pb-5 shadow-sm hover:shadow-md transition-shadow">

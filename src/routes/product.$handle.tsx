@@ -1,11 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Loader2, Truck, Factory, ArrowLeft } from "lucide-react";
-import {
-  storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice,
-} from "@/lib/shopify";
+import { formatPrice } from "@/lib/commerce";
+import { getLocalProduct, PRODUCT_CTAS } from "@/data/produits";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 
@@ -13,24 +12,12 @@ export const Route = createFileRoute("/product/$handle")({ component: ProductPag
 
 function ProductPage() {
   const { handle } = Route.useParams();
-  const { data, isLoading } = useQuery({
-    queryKey: ["product", handle],
-    queryFn: async () => {
-      const res = await storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle });
-      return res?.data?.product;
-    },
-  });
+  const data = getLocalProduct(handle)?.node;
 
   const addItem = useCartStore((s) => s.addItem);
   const cartLoading = useCartStore((s) => s.isLoading);
   const [activeImage, setActiveImage] = useState(0);
-
-  if (isLoading)
-    return (
-      <div className="max-w-7xl mx-auto px-6 py-24 grid place-items-center">
-        <Loader2 className="h-6 w-6 animate-spin text-primary" />
-      </div>
-    );
+  const [quantity, setQuantity] = useState(1);
 
   if (!data)
     return (
@@ -43,18 +30,26 @@ function ProductPage() {
   const product = data;
   const variant = product.variants.edges[0]?.node;
   const image = product.images.edges[activeImage]?.node;
+  const cta = PRODUCT_CTAS[product.handle];
 
   const handleAdd = async () => {
     if (!variant) return;
     await addItem({
       product: { node: product },
+      product_id: product.handle,
       variantId: variant.id,
       variantTitle: variant.title,
       price: variant.price,
-      quantity: 1,
+      quantity,
       selectedOptions: variant.selectedOptions || [],
     });
-    toast.success("Ajouté au panier", { description: product.title });
+    toast.success("Ajouté au panier", { description: `${product.title} — ${quantity} exemplaire(s)` });
+  };
+
+  const updateQuantity = (value: string) => {
+    const n = Number(value);
+    if (Number.isNaN(n)) return;
+    setQuantity(Math.max(1, Math.min(100, n)));
   };
 
   return (
@@ -86,10 +81,10 @@ function ProductPage() {
         </div>
 
         <div className="lg:py-6">
-          <p className="eyebrow">Nouveauté</p>
+          <p className="eyebrow">Mémora</p>
           <h1 className="font-display text-4xl md:text-5xl mt-3 leading-tight">{product.title}</h1>
           <p className="text-primary text-xl mt-4 font-medium">
-            {formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}
+            À partir de {formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}
           </p>
 
           <div className="border-t border-border my-6" />
@@ -100,13 +95,29 @@ function ProductPage() {
 
           <div className="border-t border-border my-6" />
 
-          <Button
-            onClick={handleAdd}
-            disabled={cartLoading || !variant?.availableForSale}
-            className="w-full h-14 rounded-none bg-primary hover:bg-primary/90 text-base"
-          >
-            {cartLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Ajouter au panier →"}
-          </Button>
+          {cta ? (
+            <Button asChild className="w-full h-14 rounded-none bg-primary hover:bg-primary/90 text-base">
+              <Link to={cta.to}>{cta.label} →</Link>
+            </Button>
+          ) : (
+            <div className="flex gap-3">
+              <Input
+                type="number"
+                min={1}
+                max={100}
+                value={quantity}
+                onChange={(e) => updateQuantity(e.target.value)}
+                className="w-24 h-14 text-center rounded-none text-base"
+              />
+              <Button
+                onClick={handleAdd}
+                disabled={cartLoading || !variant?.availableForSale}
+                className="flex-1 h-14 rounded-none bg-primary hover:bg-primary/90 text-base"
+              >
+                {cartLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Ajouter au panier →"}
+              </Button>
+            </div>
+          )}
 
           <div className="flex flex-wrap gap-6 mt-6 text-sm text-foreground/75">
             <div className="flex items-center gap-2"><Truck className="h-4 w-4 text-primary" strokeWidth={1.5} /> Livraison 48h</div>

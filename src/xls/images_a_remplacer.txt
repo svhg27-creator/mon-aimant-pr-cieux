@@ -1,0 +1,19 @@
+Images à remplacer
+
+Pour chaque numéro, indique le chemin de la bonne image sur ton ordinateur :
+
+35 (Canada) → chemin: ?
+44 (Corée du Nord) → chemin: ?
+45 (Corée du Sud) → chemin: ?
+77 (Hongrie) → chemin: ?
+116 (Moldavie) → chemin: ?
+117 (Mongolie) → chemin: ?
+128 (Nouvelle-Zélande) → chemin: ?
+136 (Paraguay) → chemin: ?
+164 (Suède) → chemin: ?
+182 (Uruguay) → chemin: ?
+
+Réponds dans le chat sous ce format :
+35: /chemin/vers/image.png
+44: /chemin/vers/image.png
+...

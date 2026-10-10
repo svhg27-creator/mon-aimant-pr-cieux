@@ -1,23 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Sparkles, Magnet, Gift, Truck, Factory } from "lucide-react";
-import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
 import { FamilyChips } from "@/components/site/FamilyChips";
 import { FamilyFrames } from "@/components/site/FamilyFrames";
+import { ProductCard } from "@/components/site/ProductCard";
+import { LOCAL_PRODUCTS } from "@/data/produits";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 
 export const Route = createFileRoute("/")({ component: HomePage });
 
 
 function HomePage() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["products", "home"],
-    queryFn: async () => {
-      const res = await storefrontApiRequest(PRODUCTS_QUERY, { first: 8, query: null });
-      return (res?.data?.products?.edges ?? []) as ShopifyProduct[];
-    },
-  });
+  const data = LOCAL_PRODUCTS;
 
   return (
     <div>
@@ -85,7 +79,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* PRODUCTS FROM SHOPIFY */}
+      {/* PRODUITS */}
       <section className="max-w-7xl mx-auto px-6 py-24">
         <div className="text-center mb-12">
           <p className="eyebrow">Nouveautés</p>
@@ -93,57 +87,19 @@ function HomePage() {
           <p className="text-muted-foreground mt-3">Partagé par notre communauté avec amour.</p>
         </div>
 
-        {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="aspect-square bg-muted animate-pulse" />
-            ))}
-          </div>
-        ) : !data || data.length === 0 ? (
-          <div className="text-center py-16 border border-dashed border-border">
-            <h3 className="font-display text-2xl">No products found</h3>
-            <p className="text-sm text-muted-foreground mt-2 max-w-md mx-auto">
-              Aucun produit pour l'instant. Décrivez votre premier magnet dans le chat (nom, prix, description) et je le crée pour vous.
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {data.map((product) => (
-              <Link
-                key={product.node.id}
-                to="/product/$handle"
-                params={{ handle: product.node.handle }}
-                className="group"
-              >
-                <div className="aspect-square overflow-hidden bg-muted">
-                  {product.node.images.edges[0]?.node && (
-                    <img
-                      src={product.node.images.edges[0].node.url}
-                      alt={product.node.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                    />
-                  )}
-                </div>
-                <div className="pt-4">
-                  <h3 className="font-display text-lg group-hover:text-primary transition-colors">{product.node.title}</h3>
-                  <p className="text-sm text-primary mt-1">
-                    {formatPrice(product.node.priceRange.minVariantPrice.amount, product.node.priceRange.minVariantPrice.currencyCode)}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+          {data.map((product) => (
+            <ProductCard key={product.node.id} product={product} />
+          ))}
+        </div>
       </section>
 
       {/* REASSURANCE */}
       <section className="bg-secondary/40 py-16">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center md:text-left">
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 text-center md:text-left">
           {[
             { i: Sparkles, t: "Impression premium mate", d: "Un rendu velouté qui sublime chaque détail sans reflets indésirables." },
             { i: Magnet, t: "Aimant ultra-puissant", d: "Conçu pour tenir fermement sur toutes vos surfaces métalliques préférées." },
-            { i: Gift, t: "Packaging écrin", d: "Chaque commande arrive dans un coffret haut de gamme prêt à être offert." },
           ].map((r) => (
             <div key={r.t} className="flex flex-col md:flex-row gap-4">
               <r.i className="h-6 w-6 text-primary shrink-0 mx-auto md:mx-0" strokeWidth={1.5} />

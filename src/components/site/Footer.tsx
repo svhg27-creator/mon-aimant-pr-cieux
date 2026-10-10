@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { PaymentMethods } from "@/components/site/PaymentMethods";
 
 export function Footer() {
   return (
@@ -28,10 +29,15 @@ export function Footer() {
         <FooterCol
           title="Légal"
           links={[
+            { label: "CGU", to: "/cgu" },
+            { label: "CGV", to: "/cgv" },
             { label: "Paiement sécurisé", to: "/paiement" },
             { label: "Newsletter", to: "/newsletter" },
           ]}
         />
+      </div>
+      <div className="max-w-7xl mx-auto px-6 pb-8">
+        <PaymentMethods compact />
       </div>
       <div className="border-t border-border/40 py-6 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} Mémora. Créateurs de souvenirs tactiles.

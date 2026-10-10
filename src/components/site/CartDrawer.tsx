@@ -1,30 +1,73 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger,
 } from "@/components/ui/sheet";
 import { ShoppingBag, Minus, Plus, Trash2, ArrowRight, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { useCartStore } from "@/stores/cartStore";
-import { formatPrice } from "@/lib/shopify";
+import { formatPrice } from "@/lib/commerce";
+import { supabase } from "@/integrations/supabase/client";
+import { PaymentMethods } from "@/components/site/PaymentMethods";
 
 export function CartDrawer() {
   const [isOpen, setIsOpen] = useState(false);
-  const { items, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart } =
-    useCartStore();
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const navigate = useNavigate();
+  const { items, isLoading, updateQuantity, removeItem } = useCartStore();
   const totalItems = items.reduce((s, i) => s + i.quantity, 0);
   const totalPrice = items.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0);
   const currency = items[0]?.price.currencyCode || "EUR";
 
-  useEffect(() => {
-    if (isOpen) syncCart();
-  }, [isOpen, syncCart]);
-
-  const handleCheckout = () => {
-    const url = getCheckoutUrl();
-    if (url) {
-      window.open(url, "_blank");
+  const handleCheckout = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      toast.error("Connexion requise", {
+        description: "Connectez-vous pour finaliser votre commande.",
+      });
       setIsOpen(false);
+      navigate({ to: "/auth" });
+      return;
+    }
+    if (items.length > 25) {
+      toast.error("Trop d'articles différents", {
+        description: "Maximum 25 visuels différents par commande. Contactez-nous pour les grosses commandes.",
+      });
+      return;
+    }
+    const overQty = items.find((i) => i.quantity > 20);
+    if (overQty) {
+      toast.error("Quantité trop élevée", {
+        description: `Maximum 20 exemplaires par article (« ${overQty.product.node.title} »). Contactez-nous pour les grosses commandes.`,
+      });
+      return;
+    }
+
+    setCheckoutLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: {
+          items: items.map((i) => ({
+            product_id: i.product_id ?? i.product.node.handle,
+            quantity: i.quantity,
+          })),
+          success_url: `${window.location.origin}/account/orders`,
+          cancel_url: `${window.location.origin}/collections`,
+        },
+      });
+      if (error) throw error;
+      const checkoutUrl = data?.checkout_url;
+      if (!checkoutUrl) throw new Error(data?.error || "Lien de paiement indisponible");
+      window.location.href = checkoutUrl;
+    } catch (e) {
+      console.error("Checkout failed", e);
+      toast.error("Paiement indisponible", {
+        description: "Impossible de créer la session de paiement. Réessayez dans un instant.",
+      });
+    } finally {
+      setCheckoutLoading(false);
     }
   };
 
@@ -116,12 +159,13 @@ export function CartDrawer() {
                   <span className="font-display text-xl">{formatPrice(totalPrice, currency)}</span>
                 </div>
                 <p className="text-xs text-muted-foreground">Livraison et taxes calculées au paiement.</p>
+                <PaymentMethods compact />
                 <Button
                   onClick={handleCheckout}
                   className="w-full rounded-none h-12 bg-primary hover:bg-primary/90"
-                  disabled={items.length === 0 || isLoading || isSyncing}
+                  disabled={items.length === 0 || isLoading || checkoutLoading}
                 >
-                  {isLoading || isSyncing ? (
+                  {isLoading || checkoutLoading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : (
                     <>

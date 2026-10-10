@@ -21,7 +21,10 @@ export function useAuth() {
 
   const user: User | null = session?.user ?? null;
 
-  const { data: isAdmin = false } = useQuery({
+  const {
+    data: isAdmin = false,
+    isLoading: isRoleLoading,
+  } = useQuery({
     queryKey: ["is-admin", user?.id],
     enabled: !!user,
     queryFn: async () => {
@@ -37,5 +40,5 @@ export function useAuth() {
     },
   });
 
-  return { session, user, loading, isAdmin };
+  return { session, user, loading, isAdmin, isRoleLoading };
 }

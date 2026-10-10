@@ -16,18 +16,21 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const { user, loading: authLoading, isAdmin } = useAuth();
+  const { user, loading: authLoading, isAdmin, isRoleLoading } = useAuth();
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Si déjà admin → redirection directe vers l'admin
+  // Redirection selon le rôle
   useEffect(() => {
-    if (!authLoading && user && isAdmin) {
+    if (authLoading || isRoleLoading || !user) return;
+    if (isAdmin) {
       navigate({ to: "/admin/photos" });
+    } else {
+      navigate({ to: "/account/dashboard" as any });
     }
-  }, [authLoading, user, isAdmin, navigate]);
+  }, [authLoading, isRoleLoading, user, isAdmin, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,14 +56,12 @@ function AuthPage() {
     }
   };
 
-  if (authLoading) {
+  if (authLoading || isRoleLoading) {
     return <div className="max-w-md mx-auto px-6 py-24 text-center text-muted-foreground">Chargement…</div>;
   }
 
-  // Connecté mais pas admin → panneau "demander le rôle admin"
-  if (user && !isAdmin) {
-    return <RequestAdminPanel email={user.email ?? ""} />;
-  }
+  // Connecté → redirection gérée par useEffect
+  if (user) return null;
 
   return (
     <div className="max-w-md mx-auto px-6 py-24">

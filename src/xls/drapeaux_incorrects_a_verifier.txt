@@ -1,0 +1,20 @@
+Drapeaux incorrects à vérifier
+
+Pour chaque numéro, indique le VRAI pays affiché :
+
+11 - Arménie → ?
+35 - Canada → ?
+44 - Corée du Nord → ?
+45 - Corée du Sud → ?
+89 - Japon → ?
+77 - Hongrie → ?
+117 - Mongolie → ?
+136 - Paraguay → ?
+128 - Nouvelle-Zélande → ?
+164 - Suède → ?
+182 - Uruguay → ?
+
+Réponds dans le chat sous ce format :
+11: VraiPays
+35: VraiPays
+...

@@ -12,11 +12,28 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PersonnalisationRouteImport } from './routes/personnalisation'
 import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
 import { Route as CollectionsRouteImport } from './routes/collections'
+import { Route as CgvRouteImport } from './routes/cgv'
+import { Route as CguRouteImport } from './routes/cgu'
 import { Route as AvisRouteImport } from './routes/avis'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountIndexRouteImport } from './routes/account.index'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
+import { Route as CatalogueHommageRouteImport } from './routes/catalogue.hommage'
+import { Route as CatalogueFeteMeresRouteImport } from './routes/catalogue.fete-meres'
+import { Route as CatalogueDrapeauCoeurRouteImport } from './routes/catalogue.drapeau-coeur'
 import { Route as AdminPhotosRouteImport } from './routes/admin.photos'
+import { Route as AccountSupportRouteImport } from './routes/account.support'
+import { Route as AccountSettingsRouteImport } from './routes/account.settings'
+import { Route as AccountProfileRouteImport } from './routes/account.profile'
+import { Route as AccountOrdersRouteImport } from './routes/account.orders'
+import { Route as AccountLoyaltyRouteImport } from './routes/account.loyalty'
+import { Route as AccountFavoritesRouteImport } from './routes/account.favorites'
+import { Route as AccountDashboardRouteImport } from './routes/account.dashboard'
+import { Route as AccountCreationsRouteImport } from './routes/account.creations'
+import { Route as AccountAddressesRouteImport } from './routes/account.addresses'
+import { Route as CataloguePrenomsMixtesRouteImport } from './routes/catalogue.prenoms.mixtes'
 import { Route as CataloguePrenomsGarconsRouteImport } from './routes/catalogue.prenoms.garcons'
 import { Route as CataloguePrenomsFillesRouteImport } from './routes/catalogue.prenoms.filles'
 import { Route as CatalogueDrapeauCoeurOceanieRouteImport } from './routes/catalogue.drapeau-coeur.oceanie'
@@ -30,8 +47,10 @@ import { Route as CatalogueAnimauxRongeursRouteImport } from './routes/catalogue
 import { Route as CatalogueAnimauxReptilesRouteImport } from './routes/catalogue.animaux.reptiles'
 import { Route as CatalogueAnimauxPoissonsRouteImport } from './routes/catalogue.animaux.poissons'
 import { Route as CatalogueAnimauxOiseauxRouteImport } from './routes/catalogue.animaux.oiseaux'
+import { Route as CatalogueAnimauxLapinsRouteImport } from './routes/catalogue.animaux.lapins'
 import { Route as CatalogueAnimauxChiensRouteImport } from './routes/catalogue.animaux.chiens'
 import { Route as CatalogueAnimauxChatsRouteImport } from './routes/catalogue.animaux.chats'
+import { Route as AccountOrdersOrderIdRouteImport } from './routes/account.orders.$orderId'
 
 const PersonnalisationRoute = PersonnalisationRouteImport.update({
   id: '/personnalisation',
@@ -48,6 +67,16 @@ const CollectionsRoute = CollectionsRouteImport.update({
   path: '/collections',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CgvRoute = CgvRouteImport.update({
+  id: '/cgv',
+  path: '/cgv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CguRoute = CguRouteImport.update({
+  id: '/cgu',
+  path: '/cgu',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AvisRoute = AvisRouteImport.update({
   id: '/avis',
   path: '/avis',
@@ -58,19 +87,94 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AccountIndexRoute = AccountIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AccountRoute,
 } as any)
 const ProductHandleRoute = ProductHandleRouteImport.update({
   id: '/product/$handle',
   path: '/product/$handle',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogueHommageRoute = CatalogueHommageRouteImport.update({
+  id: '/catalogue/hommage',
+  path: '/catalogue/hommage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogueFeteMeresRoute = CatalogueFeteMeresRouteImport.update({
+  id: '/catalogue/fete-meres',
+  path: '/catalogue/fete-meres',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogueDrapeauCoeurRoute = CatalogueDrapeauCoeurRouteImport.update({
+  id: '/catalogue/drapeau-coeur',
+  path: '/catalogue/drapeau-coeur',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminPhotosRoute = AdminPhotosRouteImport.update({
   id: '/admin/photos',
   path: '/admin/photos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountSupportRoute = AccountSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountSettingsRoute = AccountSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountProfileRoute = AccountProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountOrdersRoute = AccountOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountLoyaltyRoute = AccountLoyaltyRouteImport.update({
+  id: '/loyalty',
+  path: '/loyalty',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountFavoritesRoute = AccountFavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountDashboardRoute = AccountDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountCreationsRoute = AccountCreationsRouteImport.update({
+  id: '/creations',
+  path: '/creations',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountAddressesRoute = AccountAddressesRouteImport.update({
+  id: '/addresses',
+  path: '/addresses',
+  getParentRoute: () => AccountRoute,
+} as any)
+const CataloguePrenomsMixtesRoute = CataloguePrenomsMixtesRouteImport.update({
+  id: '/catalogue/prenoms/mixtes',
+  path: '/catalogue/prenoms/mixtes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CataloguePrenomsGarconsRoute = CataloguePrenomsGarconsRouteImport.update({
@@ -85,45 +189,45 @@ const CataloguePrenomsFillesRoute = CataloguePrenomsFillesRouteImport.update({
 } as any)
 const CatalogueDrapeauCoeurOceanieRoute =
   CatalogueDrapeauCoeurOceanieRouteImport.update({
-    id: '/catalogue/drapeau-coeur/oceanie',
-    path: '/catalogue/drapeau-coeur/oceanie',
-    getParentRoute: () => rootRouteImport,
+    id: '/oceanie',
+    path: '/oceanie',
+    getParentRoute: () => CatalogueDrapeauCoeurRoute,
   } as any)
 const CatalogueDrapeauCoeurEuropeRoute =
   CatalogueDrapeauCoeurEuropeRouteImport.update({
-    id: '/catalogue/drapeau-coeur/europe',
-    path: '/catalogue/drapeau-coeur/europe',
-    getParentRoute: () => rootRouteImport,
+    id: '/europe',
+    path: '/europe',
+    getParentRoute: () => CatalogueDrapeauCoeurRoute,
   } as any)
 const CatalogueDrapeauCoeurAutreRoute =
   CatalogueDrapeauCoeurAutreRouteImport.update({
-    id: '/catalogue/drapeau-coeur/autre',
-    path: '/catalogue/drapeau-coeur/autre',
-    getParentRoute: () => rootRouteImport,
+    id: '/autre',
+    path: '/autre',
+    getParentRoute: () => CatalogueDrapeauCoeurRoute,
   } as any)
 const CatalogueDrapeauCoeurAsieRoute =
   CatalogueDrapeauCoeurAsieRouteImport.update({
-    id: '/catalogue/drapeau-coeur/asie',
-    path: '/catalogue/drapeau-coeur/asie',
-    getParentRoute: () => rootRouteImport,
+    id: '/asie',
+    path: '/asie',
+    getParentRoute: () => CatalogueDrapeauCoeurRoute,
   } as any)
 const CatalogueDrapeauCoeurAmeriqueSudRoute =
   CatalogueDrapeauCoeurAmeriqueSudRouteImport.update({
-    id: '/catalogue/drapeau-coeur/amerique-sud',
-    path: '/catalogue/drapeau-coeur/amerique-sud',
-    getParentRoute: () => rootRouteImport,
+    id: '/amerique-sud',
+    path: '/amerique-sud',
+    getParentRoute: () => CatalogueDrapeauCoeurRoute,
   } as any)
 const CatalogueDrapeauCoeurAmeriqueNordRoute =
   CatalogueDrapeauCoeurAmeriqueNordRouteImport.update({
-    id: '/catalogue/drapeau-coeur/amerique-nord',
-    path: '/catalogue/drapeau-coeur/amerique-nord',
-    getParentRoute: () => rootRouteImport,
+    id: '/amerique-nord',
+    path: '/amerique-nord',
+    getParentRoute: () => CatalogueDrapeauCoeurRoute,
   } as any)
 const CatalogueDrapeauCoeurAfriqueRoute =
   CatalogueDrapeauCoeurAfriqueRouteImport.update({
-    id: '/catalogue/drapeau-coeur/afrique',
-    path: '/catalogue/drapeau-coeur/afrique',
-    getParentRoute: () => rootRouteImport,
+    id: '/afrique',
+    path: '/afrique',
+    getParentRoute: () => CatalogueDrapeauCoeurRoute,
   } as any)
 const CatalogueAnimauxRongeursRoute =
   CatalogueAnimauxRongeursRouteImport.update({
@@ -148,6 +252,11 @@ const CatalogueAnimauxOiseauxRoute = CatalogueAnimauxOiseauxRouteImport.update({
   path: '/catalogue/animaux/oiseaux',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogueAnimauxLapinsRoute = CatalogueAnimauxLapinsRouteImport.update({
+  id: '/catalogue/animaux/lapins',
+  path: '/catalogue/animaux/lapins',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogueAnimauxChiensRoute = CatalogueAnimauxChiensRouteImport.update({
   id: '/catalogue/animaux/chiens',
   path: '/catalogue/animaux/chiens',
@@ -158,18 +267,41 @@ const CatalogueAnimauxChatsRoute = CatalogueAnimauxChatsRouteImport.update({
   path: '/catalogue/animaux/chats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountOrdersOrderIdRoute = AccountOrdersOrderIdRouteImport.update({
+  id: '/$orderId',
+  path: '/$orderId',
+  getParentRoute: () => AccountOrdersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRouteWithChildren
   '/auth': typeof AuthRoute
   '/avis': typeof AvisRoute
+  '/cgu': typeof CguRoute
+  '/cgv': typeof CgvRoute
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
+  '/account/addresses': typeof AccountAddressesRoute
+  '/account/creations': typeof AccountCreationsRoute
+  '/account/dashboard': typeof AccountDashboardRoute
+  '/account/favorites': typeof AccountFavoritesRoute
+  '/account/loyalty': typeof AccountLoyaltyRoute
+  '/account/orders': typeof AccountOrdersRouteWithChildren
+  '/account/profile': typeof AccountProfileRoute
+  '/account/settings': typeof AccountSettingsRoute
+  '/account/support': typeof AccountSupportRoute
   '/admin/photos': typeof AdminPhotosRoute
+  '/catalogue/drapeau-coeur': typeof CatalogueDrapeauCoeurRouteWithChildren
+  '/catalogue/fete-meres': typeof CatalogueFeteMeresRoute
+  '/catalogue/hommage': typeof CatalogueHommageRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/account/': typeof AccountIndexRoute
+  '/account/orders/$orderId': typeof AccountOrdersOrderIdRoute
   '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
   '/catalogue/animaux/chiens': typeof CatalogueAnimauxChiensRoute
+  '/catalogue/animaux/lapins': typeof CatalogueAnimauxLapinsRoute
   '/catalogue/animaux/oiseaux': typeof CatalogueAnimauxOiseauxRoute
   '/catalogue/animaux/poissons': typeof CatalogueAnimauxPoissonsRoute
   '/catalogue/animaux/reptiles': typeof CatalogueAnimauxReptilesRoute
@@ -183,18 +315,36 @@ export interface FileRoutesByFullPath {
   '/catalogue/drapeau-coeur/oceanie': typeof CatalogueDrapeauCoeurOceanieRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
+  '/catalogue/prenoms/mixtes': typeof CataloguePrenomsMixtesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/avis': typeof AvisRoute
+  '/cgu': typeof CguRoute
+  '/cgv': typeof CgvRoute
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
+  '/account/addresses': typeof AccountAddressesRoute
+  '/account/creations': typeof AccountCreationsRoute
+  '/account/dashboard': typeof AccountDashboardRoute
+  '/account/favorites': typeof AccountFavoritesRoute
+  '/account/loyalty': typeof AccountLoyaltyRoute
+  '/account/orders': typeof AccountOrdersRouteWithChildren
+  '/account/profile': typeof AccountProfileRoute
+  '/account/settings': typeof AccountSettingsRoute
+  '/account/support': typeof AccountSupportRoute
   '/admin/photos': typeof AdminPhotosRoute
+  '/catalogue/drapeau-coeur': typeof CatalogueDrapeauCoeurRouteWithChildren
+  '/catalogue/fete-meres': typeof CatalogueFeteMeresRoute
+  '/catalogue/hommage': typeof CatalogueHommageRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/account': typeof AccountIndexRoute
+  '/account/orders/$orderId': typeof AccountOrdersOrderIdRoute
   '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
   '/catalogue/animaux/chiens': typeof CatalogueAnimauxChiensRoute
+  '/catalogue/animaux/lapins': typeof CatalogueAnimauxLapinsRoute
   '/catalogue/animaux/oiseaux': typeof CatalogueAnimauxOiseauxRoute
   '/catalogue/animaux/poissons': typeof CatalogueAnimauxPoissonsRoute
   '/catalogue/animaux/reptiles': typeof CatalogueAnimauxReptilesRoute
@@ -208,19 +358,38 @@ export interface FileRoutesByTo {
   '/catalogue/drapeau-coeur/oceanie': typeof CatalogueDrapeauCoeurOceanieRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
+  '/catalogue/prenoms/mixtes': typeof CataloguePrenomsMixtesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account': typeof AccountRouteWithChildren
   '/auth': typeof AuthRoute
   '/avis': typeof AvisRoute
+  '/cgu': typeof CguRoute
+  '/cgv': typeof CgvRoute
   '/collections': typeof CollectionsRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
+  '/account/addresses': typeof AccountAddressesRoute
+  '/account/creations': typeof AccountCreationsRoute
+  '/account/dashboard': typeof AccountDashboardRoute
+  '/account/favorites': typeof AccountFavoritesRoute
+  '/account/loyalty': typeof AccountLoyaltyRoute
+  '/account/orders': typeof AccountOrdersRouteWithChildren
+  '/account/profile': typeof AccountProfileRoute
+  '/account/settings': typeof AccountSettingsRoute
+  '/account/support': typeof AccountSupportRoute
   '/admin/photos': typeof AdminPhotosRoute
+  '/catalogue/drapeau-coeur': typeof CatalogueDrapeauCoeurRouteWithChildren
+  '/catalogue/fete-meres': typeof CatalogueFeteMeresRoute
+  '/catalogue/hommage': typeof CatalogueHommageRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/account/': typeof AccountIndexRoute
+  '/account/orders/$orderId': typeof AccountOrdersOrderIdRoute
   '/catalogue/animaux/chats': typeof CatalogueAnimauxChatsRoute
   '/catalogue/animaux/chiens': typeof CatalogueAnimauxChiensRoute
+  '/catalogue/animaux/lapins': typeof CatalogueAnimauxLapinsRoute
   '/catalogue/animaux/oiseaux': typeof CatalogueAnimauxOiseauxRoute
   '/catalogue/animaux/poissons': typeof CatalogueAnimauxPoissonsRoute
   '/catalogue/animaux/reptiles': typeof CatalogueAnimauxReptilesRoute
@@ -234,20 +403,39 @@ export interface FileRoutesById {
   '/catalogue/drapeau-coeur/oceanie': typeof CatalogueDrapeauCoeurOceanieRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
+  '/catalogue/prenoms/mixtes': typeof CataloguePrenomsMixtesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/account'
     | '/auth'
     | '/avis'
+    | '/cgu'
+    | '/cgv'
     | '/collections'
     | '/notre-histoire'
     | '/personnalisation'
+    | '/account/addresses'
+    | '/account/creations'
+    | '/account/dashboard'
+    | '/account/favorites'
+    | '/account/loyalty'
+    | '/account/orders'
+    | '/account/profile'
+    | '/account/settings'
+    | '/account/support'
     | '/admin/photos'
+    | '/catalogue/drapeau-coeur'
+    | '/catalogue/fete-meres'
+    | '/catalogue/hommage'
     | '/product/$handle'
+    | '/account/'
+    | '/account/orders/$orderId'
     | '/catalogue/animaux/chats'
     | '/catalogue/animaux/chiens'
+    | '/catalogue/animaux/lapins'
     | '/catalogue/animaux/oiseaux'
     | '/catalogue/animaux/poissons'
     | '/catalogue/animaux/reptiles'
@@ -261,18 +449,36 @@ export interface FileRouteTypes {
     | '/catalogue/drapeau-coeur/oceanie'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
+    | '/catalogue/prenoms/mixtes'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/avis'
+    | '/cgu'
+    | '/cgv'
     | '/collections'
     | '/notre-histoire'
     | '/personnalisation'
+    | '/account/addresses'
+    | '/account/creations'
+    | '/account/dashboard'
+    | '/account/favorites'
+    | '/account/loyalty'
+    | '/account/orders'
+    | '/account/profile'
+    | '/account/settings'
+    | '/account/support'
     | '/admin/photos'
+    | '/catalogue/drapeau-coeur'
+    | '/catalogue/fete-meres'
+    | '/catalogue/hommage'
     | '/product/$handle'
+    | '/account'
+    | '/account/orders/$orderId'
     | '/catalogue/animaux/chats'
     | '/catalogue/animaux/chiens'
+    | '/catalogue/animaux/lapins'
     | '/catalogue/animaux/oiseaux'
     | '/catalogue/animaux/poissons'
     | '/catalogue/animaux/reptiles'
@@ -286,18 +492,37 @@ export interface FileRouteTypes {
     | '/catalogue/drapeau-coeur/oceanie'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
+    | '/catalogue/prenoms/mixtes'
   id:
     | '__root__'
     | '/'
+    | '/account'
     | '/auth'
     | '/avis'
+    | '/cgu'
+    | '/cgv'
     | '/collections'
     | '/notre-histoire'
     | '/personnalisation'
+    | '/account/addresses'
+    | '/account/creations'
+    | '/account/dashboard'
+    | '/account/favorites'
+    | '/account/loyalty'
+    | '/account/orders'
+    | '/account/profile'
+    | '/account/settings'
+    | '/account/support'
     | '/admin/photos'
+    | '/catalogue/drapeau-coeur'
+    | '/catalogue/fete-meres'
+    | '/catalogue/hommage'
     | '/product/$handle'
+    | '/account/'
+    | '/account/orders/$orderId'
     | '/catalogue/animaux/chats'
     | '/catalogue/animaux/chiens'
+    | '/catalogue/animaux/lapins'
     | '/catalogue/animaux/oiseaux'
     | '/catalogue/animaux/poissons'
     | '/catalogue/animaux/reptiles'
@@ -311,32 +536,34 @@ export interface FileRouteTypes {
     | '/catalogue/drapeau-coeur/oceanie'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
+    | '/catalogue/prenoms/mixtes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRouteWithChildren
   AuthRoute: typeof AuthRoute
   AvisRoute: typeof AvisRoute
+  CguRoute: typeof CguRoute
+  CgvRoute: typeof CgvRoute
   CollectionsRoute: typeof CollectionsRoute
   NotreHistoireRoute: typeof NotreHistoireRoute
   PersonnalisationRoute: typeof PersonnalisationRoute
   AdminPhotosRoute: typeof AdminPhotosRoute
+  CatalogueDrapeauCoeurRoute: typeof CatalogueDrapeauCoeurRouteWithChildren
+  CatalogueFeteMeresRoute: typeof CatalogueFeteMeresRoute
+  CatalogueHommageRoute: typeof CatalogueHommageRoute
   ProductHandleRoute: typeof ProductHandleRoute
   CatalogueAnimauxChatsRoute: typeof CatalogueAnimauxChatsRoute
   CatalogueAnimauxChiensRoute: typeof CatalogueAnimauxChiensRoute
+  CatalogueAnimauxLapinsRoute: typeof CatalogueAnimauxLapinsRoute
   CatalogueAnimauxOiseauxRoute: typeof CatalogueAnimauxOiseauxRoute
   CatalogueAnimauxPoissonsRoute: typeof CatalogueAnimauxPoissonsRoute
   CatalogueAnimauxReptilesRoute: typeof CatalogueAnimauxReptilesRoute
   CatalogueAnimauxRongeursRoute: typeof CatalogueAnimauxRongeursRoute
-  CatalogueDrapeauCoeurAfriqueRoute: typeof CatalogueDrapeauCoeurAfriqueRoute
-  CatalogueDrapeauCoeurAmeriqueNordRoute: typeof CatalogueDrapeauCoeurAmeriqueNordRoute
-  CatalogueDrapeauCoeurAmeriqueSudRoute: typeof CatalogueDrapeauCoeurAmeriqueSudRoute
-  CatalogueDrapeauCoeurAsieRoute: typeof CatalogueDrapeauCoeurAsieRoute
-  CatalogueDrapeauCoeurAutreRoute: typeof CatalogueDrapeauCoeurAutreRoute
-  CatalogueDrapeauCoeurEuropeRoute: typeof CatalogueDrapeauCoeurEuropeRoute
-  CatalogueDrapeauCoeurOceanieRoute: typeof CatalogueDrapeauCoeurOceanieRoute
   CataloguePrenomsFillesRoute: typeof CataloguePrenomsFillesRoute
   CataloguePrenomsGarconsRoute: typeof CataloguePrenomsGarconsRoute
+  CataloguePrenomsMixtesRoute: typeof CataloguePrenomsMixtesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -362,6 +589,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cgv': {
+      id: '/cgv'
+      path: '/cgv'
+      fullPath: '/cgv'
+      preLoaderRoute: typeof CgvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cgu': {
+      id: '/cgu'
+      path: '/cgu'
+      fullPath: '/cgu'
+      preLoaderRoute: typeof CguRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/avis': {
       id: '/avis'
       path: '/avis'
@@ -376,12 +617,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/account/': {
+      id: '/account/'
+      path: '/'
+      fullPath: '/account/'
+      preLoaderRoute: typeof AccountIndexRouteImport
+      parentRoute: typeof AccountRoute
     }
     '/product/$handle': {
       id: '/product/$handle'
@@ -390,11 +645,102 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductHandleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogue/hommage': {
+      id: '/catalogue/hommage'
+      path: '/catalogue/hommage'
+      fullPath: '/catalogue/hommage'
+      preLoaderRoute: typeof CatalogueHommageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/fete-meres': {
+      id: '/catalogue/fete-meres'
+      path: '/catalogue/fete-meres'
+      fullPath: '/catalogue/fete-meres'
+      preLoaderRoute: typeof CatalogueFeteMeresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue/drapeau-coeur': {
+      id: '/catalogue/drapeau-coeur'
+      path: '/catalogue/drapeau-coeur'
+      fullPath: '/catalogue/drapeau-coeur'
+      preLoaderRoute: typeof CatalogueDrapeauCoeurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/photos': {
       id: '/admin/photos'
       path: '/admin/photos'
       fullPath: '/admin/photos'
       preLoaderRoute: typeof AdminPhotosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/support': {
+      id: '/account/support'
+      path: '/support'
+      fullPath: '/account/support'
+      preLoaderRoute: typeof AccountSupportRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/settings': {
+      id: '/account/settings'
+      path: '/settings'
+      fullPath: '/account/settings'
+      preLoaderRoute: typeof AccountSettingsRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/profile': {
+      id: '/account/profile'
+      path: '/profile'
+      fullPath: '/account/profile'
+      preLoaderRoute: typeof AccountProfileRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/orders': {
+      id: '/account/orders'
+      path: '/orders'
+      fullPath: '/account/orders'
+      preLoaderRoute: typeof AccountOrdersRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/loyalty': {
+      id: '/account/loyalty'
+      path: '/loyalty'
+      fullPath: '/account/loyalty'
+      preLoaderRoute: typeof AccountLoyaltyRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/favorites': {
+      id: '/account/favorites'
+      path: '/favorites'
+      fullPath: '/account/favorites'
+      preLoaderRoute: typeof AccountFavoritesRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/dashboard': {
+      id: '/account/dashboard'
+      path: '/dashboard'
+      fullPath: '/account/dashboard'
+      preLoaderRoute: typeof AccountDashboardRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/creations': {
+      id: '/account/creations'
+      path: '/creations'
+      fullPath: '/account/creations'
+      preLoaderRoute: typeof AccountCreationsRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/addresses': {
+      id: '/account/addresses'
+      path: '/addresses'
+      fullPath: '/account/addresses'
+      preLoaderRoute: typeof AccountAddressesRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/catalogue/prenoms/mixtes': {
+      id: '/catalogue/prenoms/mixtes'
+      path: '/catalogue/prenoms/mixtes'
+      fullPath: '/catalogue/prenoms/mixtes'
+      preLoaderRoute: typeof CataloguePrenomsMixtesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogue/prenoms/garcons': {
@@ -413,52 +759,52 @@ declare module '@tanstack/react-router' {
     }
     '/catalogue/drapeau-coeur/oceanie': {
       id: '/catalogue/drapeau-coeur/oceanie'
-      path: '/catalogue/drapeau-coeur/oceanie'
+      path: '/oceanie'
       fullPath: '/catalogue/drapeau-coeur/oceanie'
       preLoaderRoute: typeof CatalogueDrapeauCoeurOceanieRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CatalogueDrapeauCoeurRoute
     }
     '/catalogue/drapeau-coeur/europe': {
       id: '/catalogue/drapeau-coeur/europe'
-      path: '/catalogue/drapeau-coeur/europe'
+      path: '/europe'
       fullPath: '/catalogue/drapeau-coeur/europe'
       preLoaderRoute: typeof CatalogueDrapeauCoeurEuropeRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CatalogueDrapeauCoeurRoute
     }
     '/catalogue/drapeau-coeur/autre': {
       id: '/catalogue/drapeau-coeur/autre'
-      path: '/catalogue/drapeau-coeur/autre'
+      path: '/autre'
       fullPath: '/catalogue/drapeau-coeur/autre'
       preLoaderRoute: typeof CatalogueDrapeauCoeurAutreRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CatalogueDrapeauCoeurRoute
     }
     '/catalogue/drapeau-coeur/asie': {
       id: '/catalogue/drapeau-coeur/asie'
-      path: '/catalogue/drapeau-coeur/asie'
+      path: '/asie'
       fullPath: '/catalogue/drapeau-coeur/asie'
       preLoaderRoute: typeof CatalogueDrapeauCoeurAsieRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CatalogueDrapeauCoeurRoute
     }
     '/catalogue/drapeau-coeur/amerique-sud': {
       id: '/catalogue/drapeau-coeur/amerique-sud'
-      path: '/catalogue/drapeau-coeur/amerique-sud'
+      path: '/amerique-sud'
       fullPath: '/catalogue/drapeau-coeur/amerique-sud'
       preLoaderRoute: typeof CatalogueDrapeauCoeurAmeriqueSudRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CatalogueDrapeauCoeurRoute
     }
     '/catalogue/drapeau-coeur/amerique-nord': {
       id: '/catalogue/drapeau-coeur/amerique-nord'
-      path: '/catalogue/drapeau-coeur/amerique-nord'
+      path: '/amerique-nord'
       fullPath: '/catalogue/drapeau-coeur/amerique-nord'
       preLoaderRoute: typeof CatalogueDrapeauCoeurAmeriqueNordRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CatalogueDrapeauCoeurRoute
     }
     '/catalogue/drapeau-coeur/afrique': {
       id: '/catalogue/drapeau-coeur/afrique'
-      path: '/catalogue/drapeau-coeur/afrique'
+      path: '/afrique'
       fullPath: '/catalogue/drapeau-coeur/afrique'
       preLoaderRoute: typeof CatalogueDrapeauCoeurAfriqueRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CatalogueDrapeauCoeurRoute
     }
     '/catalogue/animaux/rongeurs': {
       id: '/catalogue/animaux/rongeurs'
@@ -488,6 +834,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogueAnimauxOiseauxRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogue/animaux/lapins': {
+      id: '/catalogue/animaux/lapins'
+      path: '/catalogue/animaux/lapins'
+      fullPath: '/catalogue/animaux/lapins'
+      preLoaderRoute: typeof CatalogueAnimauxLapinsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogue/animaux/chiens': {
       id: '/catalogue/animaux/chiens'
       path: '/catalogue/animaux/chiens'
@@ -502,24 +855,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogueAnimauxChatsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/orders/$orderId': {
+      id: '/account/orders/$orderId'
+      path: '/$orderId'
+      fullPath: '/account/orders/$orderId'
+      preLoaderRoute: typeof AccountOrdersOrderIdRouteImport
+      parentRoute: typeof AccountOrdersRoute
+    }
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AuthRoute: AuthRoute,
-  AvisRoute: AvisRoute,
-  CollectionsRoute: CollectionsRoute,
-  NotreHistoireRoute: NotreHistoireRoute,
-  PersonnalisationRoute: PersonnalisationRoute,
-  AdminPhotosRoute: AdminPhotosRoute,
-  ProductHandleRoute: ProductHandleRoute,
-  CatalogueAnimauxChatsRoute: CatalogueAnimauxChatsRoute,
-  CatalogueAnimauxChiensRoute: CatalogueAnimauxChiensRoute,
-  CatalogueAnimauxOiseauxRoute: CatalogueAnimauxOiseauxRoute,
-  CatalogueAnimauxPoissonsRoute: CatalogueAnimauxPoissonsRoute,
-  CatalogueAnimauxReptilesRoute: CatalogueAnimauxReptilesRoute,
-  CatalogueAnimauxRongeursRoute: CatalogueAnimauxRongeursRoute,
+interface AccountOrdersRouteChildren {
+  AccountOrdersOrderIdRoute: typeof AccountOrdersOrderIdRoute
+}
+
+const AccountOrdersRouteChildren: AccountOrdersRouteChildren = {
+  AccountOrdersOrderIdRoute: AccountOrdersOrderIdRoute,
+}
+
+const AccountOrdersRouteWithChildren = AccountOrdersRoute._addFileChildren(
+  AccountOrdersRouteChildren,
+)
+
+interface AccountRouteChildren {
+  AccountAddressesRoute: typeof AccountAddressesRoute
+  AccountCreationsRoute: typeof AccountCreationsRoute
+  AccountDashboardRoute: typeof AccountDashboardRoute
+  AccountFavoritesRoute: typeof AccountFavoritesRoute
+  AccountLoyaltyRoute: typeof AccountLoyaltyRoute
+  AccountOrdersRoute: typeof AccountOrdersRouteWithChildren
+  AccountProfileRoute: typeof AccountProfileRoute
+  AccountSettingsRoute: typeof AccountSettingsRoute
+  AccountSupportRoute: typeof AccountSupportRoute
+  AccountIndexRoute: typeof AccountIndexRoute
+}
+
+const AccountRouteChildren: AccountRouteChildren = {
+  AccountAddressesRoute: AccountAddressesRoute,
+  AccountCreationsRoute: AccountCreationsRoute,
+  AccountDashboardRoute: AccountDashboardRoute,
+  AccountFavoritesRoute: AccountFavoritesRoute,
+  AccountLoyaltyRoute: AccountLoyaltyRoute,
+  AccountOrdersRoute: AccountOrdersRouteWithChildren,
+  AccountProfileRoute: AccountProfileRoute,
+  AccountSettingsRoute: AccountSettingsRoute,
+  AccountSupportRoute: AccountSupportRoute,
+  AccountIndexRoute: AccountIndexRoute,
+}
+
+const AccountRouteWithChildren =
+  AccountRoute._addFileChildren(AccountRouteChildren)
+
+interface CatalogueDrapeauCoeurRouteChildren {
+  CatalogueDrapeauCoeurAfriqueRoute: typeof CatalogueDrapeauCoeurAfriqueRoute
+  CatalogueDrapeauCoeurAmeriqueNordRoute: typeof CatalogueDrapeauCoeurAmeriqueNordRoute
+  CatalogueDrapeauCoeurAmeriqueSudRoute: typeof CatalogueDrapeauCoeurAmeriqueSudRoute
+  CatalogueDrapeauCoeurAsieRoute: typeof CatalogueDrapeauCoeurAsieRoute
+  CatalogueDrapeauCoeurAutreRoute: typeof CatalogueDrapeauCoeurAutreRoute
+  CatalogueDrapeauCoeurEuropeRoute: typeof CatalogueDrapeauCoeurEuropeRoute
+  CatalogueDrapeauCoeurOceanieRoute: typeof CatalogueDrapeauCoeurOceanieRoute
+}
+
+const CatalogueDrapeauCoeurRouteChildren: CatalogueDrapeauCoeurRouteChildren = {
   CatalogueDrapeauCoeurAfriqueRoute: CatalogueDrapeauCoeurAfriqueRoute,
   CatalogueDrapeauCoeurAmeriqueNordRoute:
     CatalogueDrapeauCoeurAmeriqueNordRoute,
@@ -528,8 +925,38 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogueDrapeauCoeurAutreRoute: CatalogueDrapeauCoeurAutreRoute,
   CatalogueDrapeauCoeurEuropeRoute: CatalogueDrapeauCoeurEuropeRoute,
   CatalogueDrapeauCoeurOceanieRoute: CatalogueDrapeauCoeurOceanieRoute,
+}
+
+const CatalogueDrapeauCoeurRouteWithChildren =
+  CatalogueDrapeauCoeurRoute._addFileChildren(
+    CatalogueDrapeauCoeurRouteChildren,
+  )
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AccountRoute: AccountRouteWithChildren,
+  AuthRoute: AuthRoute,
+  AvisRoute: AvisRoute,
+  CguRoute: CguRoute,
+  CgvRoute: CgvRoute,
+  CollectionsRoute: CollectionsRoute,
+  NotreHistoireRoute: NotreHistoireRoute,
+  PersonnalisationRoute: PersonnalisationRoute,
+  AdminPhotosRoute: AdminPhotosRoute,
+  CatalogueDrapeauCoeurRoute: CatalogueDrapeauCoeurRouteWithChildren,
+  CatalogueFeteMeresRoute: CatalogueFeteMeresRoute,
+  CatalogueHommageRoute: CatalogueHommageRoute,
+  ProductHandleRoute: ProductHandleRoute,
+  CatalogueAnimauxChatsRoute: CatalogueAnimauxChatsRoute,
+  CatalogueAnimauxChiensRoute: CatalogueAnimauxChiensRoute,
+  CatalogueAnimauxLapinsRoute: CatalogueAnimauxLapinsRoute,
+  CatalogueAnimauxOiseauxRoute: CatalogueAnimauxOiseauxRoute,
+  CatalogueAnimauxPoissonsRoute: CatalogueAnimauxPoissonsRoute,
+  CatalogueAnimauxReptilesRoute: CatalogueAnimauxReptilesRoute,
+  CatalogueAnimauxRongeursRoute: CatalogueAnimauxRongeursRoute,
   CataloguePrenomsFillesRoute: CataloguePrenomsFillesRoute,
   CataloguePrenomsGarconsRoute: CataloguePrenomsGarconsRoute,
+  CataloguePrenomsMixtesRoute: CataloguePrenomsMixtesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

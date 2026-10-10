@@ -15,6 +15,7 @@ dist-ssr
 .tanstack/**
 .nitro
 *.local
+.env
 
 # Wrangler / Cloudflare
 .wrangler/
@@ -30,3 +31,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local Netlify folder
+.netlify
+
+# Assets catalogue générés (reproductibles via src/xls/)
+public/catalogue/
+.DS_Store
+
+# Fichiers Excel source (lourds, conservés localement)
+*.xlsx
+*.xlsm
