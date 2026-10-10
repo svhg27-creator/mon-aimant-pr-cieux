@@ -17,20 +17,30 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const navigate = useNavigate();
   const { user, loading: authLoading, isAdmin, isRoleLoading } = useAuth();
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [mode, setMode] = useState<"login" | "signup" | "forgot" | "reset">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Redirection selon le rôle
+  // Retour du lien "mot de passe oublié" → mode réinitialisation
   useEffect(() => {
-    if (authLoading || isRoleLoading || !user) return;
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") setMode("reset");
+    });
+    if (window.location.hash.includes("type=recovery")) setMode("reset");
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Redirection selon le rôle (pas en mode réinitialisation)
+  useEffect(() => {
+    if (authLoading || isRoleLoading || !user || mode === "reset") return;
     if (isAdmin) {
       navigate({ to: "/admin/photos" });
     } else {
       navigate({ to: "/account/dashboard" as any });
     }
-  }, [authLoading, isRoleLoading, user, isAdmin, navigate]);
+  }, [authLoading, isRoleLoading, user, isAdmin, navigate, mode]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +50,7 @@ function AuthPage() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("Connecté");
-      } else {
+      } else if (mode === "signup") {
         const { error } = await supabase.auth.signUp({
           email,
           password,
@@ -48,6 +58,22 @@ function AuthPage() {
         });
         if (error) throw error;
         toast.success("Compte créé — vérifiez vos emails.");
+      } else if (mode === "forgot") {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/auth`,
+        });
+        if (error) throw error;
+        toast.success("Email de réinitialisation envoyé — vérifiez votre boîte mail.");
+        setMode("login");
+      } else {
+        if (password !== passwordConfirm) throw new Error("Les deux mots de passe ne correspondent pas.");
+        const { error } = await supabase.auth.updateUser({ password });
+        if (error) throw error;
+        await supabase.auth.signOut();
+        toast.success("Mot de passe mis à jour — connectez-vous.");
+        setMode("login");
+        setPassword("");
+        setPasswordConfirm("");
       }
     } catch (err: any) {
       toast.error(err.message || "Erreur");
@@ -60,37 +86,77 @@ function AuthPage() {
     return <div className="max-w-md mx-auto px-6 py-24 text-center text-muted-foreground">Chargement…</div>;
   }
 
-  // Connecté → redirection gérée par useEffect
-  if (user) return null;
+  // Connecté → redirection gérée par useEffect (sauf réinitialisation)
+  if (user && mode !== "reset") return null;
+
+  const titles = {
+    login: "Connexion",
+    signup: "Créer un compte",
+    forgot: "Mot de passe oublié",
+    reset: "Nouveau mot de passe",
+  };
+  const submitLabels = {
+    login: "Se connecter",
+    signup: "Créer le compte",
+    forgot: "Envoyer le lien",
+    reset: "Mettre à jour",
+  };
 
   return (
     <div className="max-w-md mx-auto px-6 py-24">
       <div className="text-center mb-10">
         <p className="eyebrow">Espace privé</p>
-        <h1 className="font-display text-4xl mt-3">
-          {mode === "login" ? "Connexion" : "Créer un compte"}
-        </h1>
+        <h1 className="font-display text-4xl mt-3">{titles[mode]}</h1>
+        {mode === "forgot" && (
+          <p className="text-sm text-muted-foreground mt-3">
+            Saisissez votre email — vous recevrez un lien pour créer un nouveau mot de passe.
+          </p>
+        )}
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        <div>
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <Label htmlFor="password">Mot de passe</Label>
-          <Input id="password" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
+        {mode !== "reset" && (
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+        )}
+        {(mode === "login" || mode === "signup") && (
+          <div>
+            <Label htmlFor="password">Mot de passe</Label>
+            <Input id="password" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+        )}
+        {mode === "reset" && (
+          <>
+            <div>
+              <Label htmlFor="password">Nouveau mot de passe</Label>
+              <Input id="password" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
+            </div>
+            <div>
+              <Label htmlFor="password-confirm">Confirmer le mot de passe</Label>
+              <Input id="password-confirm" type="password" required minLength={6} value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} />
+            </div>
+          </>
+        )}
         <Button type="submit" disabled={loading} className="w-full rounded-none h-11">
-          {loading ? "..." : mode === "login" ? "Se connecter" : "Créer le compte"}
+          {loading ? "..." : submitLabels[mode]}
         </Button>
       </form>
+
+      {mode === "login" && (
+        <p className="text-center text-sm mt-4">
+          <button onClick={() => setMode("forgot")} className="text-muted-foreground hover:underline">
+            Mot de passe oublié ?
+          </button>
+        </p>
+      )}
 
       <p className="text-center text-sm text-muted-foreground mt-6">
         {mode === "login" ? (
           <>Pas encore de compte ? <button onClick={() => setMode("signup")} className="text-primary hover:underline">Créer un compte</button></>
         ) : (
-          <>Déjà inscrit ? <button onClick={() => setMode("login")} className="text-primary hover:underline">Se connecter</button></>
+          <><button onClick={() => setMode("login")} className="text-primary hover:underline">← Retour à la connexion</button></>
         )}
       </p>
 
