@@ -48,6 +48,34 @@ function ChiensPage() {
           Catalogue Animaux
         </p>
         <h1 className="font-display text-5xl mt-3">Chiens</h1>
+
+        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mt-8">
+          <div className="aspect-square overflow-hidden bg-white border border-border relative">
+            <img
+              src="/images/magnet-chien-recto.jpg"
+              alt="Magnet chien — recto"
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+            <span className="absolute bottom-1 right-2 text-[10px] uppercase tracking-wide text-muted-foreground">
+              Recto
+            </span>
+          </div>
+          <div className="aspect-square overflow-hidden bg-white border border-border relative">
+            <img
+              src="/images/magnet-chien-verso.jpg"
+              alt="Magnet chien — verso avec QR code"
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+            <span className="absolute bottom-1 right-2 text-[10px] uppercase tracking-wide text-muted-foreground">
+              Verso
+            </span>
+          </div>
+        </div>
+        <p className="text-xs text-muted-foreground mt-3">
+          Chaque magnet porte un QR code au dos — à scanner pour retrouver la race.
+        </p>
       </div>
       {loading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
