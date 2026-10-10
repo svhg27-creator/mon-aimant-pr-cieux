@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { formatPrice } from "@/lib/utils";
-import { ArrowLeft, Package, Truck, CreditCard, FileText, RotateCcw } from "lucide-react";
+import { ArrowLeft, Package, Truck, CreditCard, FileText, RotateCcw, MapPin } from "lucide-react";
 
 export const Route = createFileRoute("/account/orders/$orderId")({
   component: OrderDetailPage,
@@ -153,6 +153,29 @@ function OrderDetailPage() {
         </Card>
 
         <div className="space-y-6">
+          <Card className="rounded-none border shadow-none">
+            <CardHeader className="pb-3">
+              <CardTitle className="font-display text-lg flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-primary" /> Adresse de livraison
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm space-y-1">
+              {order.shipping_address ? (
+                <>
+                  {order.customer_name && <p className="font-medium">{order.customer_name}</p>}
+                  <p>{order.shipping_address.line1}</p>
+                  {order.shipping_address.line2 && <p>{order.shipping_address.line2}</p>}
+                  <p>
+                    {order.shipping_address.postal_code} {order.shipping_address.city}
+                  </p>
+                  <p className="text-muted-foreground">{order.shipping_address.country}</p>
+                </>
+              ) : (
+                <p className="text-muted-foreground">Aucune adresse enregistrée.</p>
+              )}
+            </CardContent>
+          </Card>
+
           <Card className="rounded-none border shadow-none">
             <CardHeader className="pb-3">
               <CardTitle className="font-display text-lg flex items-center gap-2">
