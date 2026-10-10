@@ -149,7 +149,8 @@ serve(async (req) => {
       });
     }
 
-    const shippingDetails = session.shipping_details ?? null;
+    const shippingDetails =
+      session.shipping_details ?? session.collected_information?.shipping_details ?? null;
     const { error: updateOrderError } = await supabase
       .from("orders")
       .update({
