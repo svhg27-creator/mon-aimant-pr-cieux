@@ -2,15 +2,133 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { ArrowRight, Crown } from "lucide-react";
 import { ProductCard } from "@/components/site/ProductCard";
 import { FamilyChips, FAMILIES } from "@/components/site/FamilyChips";
+import { FamilyTeaser, type FamilyTeaserConfig } from "@/components/site/FamilyTeaser";
 import { LOCAL_PRODUCTS } from "@/data/produits";
 
 const familyIds = FAMILIES.map((f) => f.id) as [string, ...string[]];
 const searchSchema = z.object({
   famille: fallback(z.enum(familyIds), "all").default("all"),
 });
+
+const FAMILY_TEASERS: Record<string, FamilyTeaserConfig> = {
+  prenoms: {
+    rectoLabel: "Prénom",
+    children: (
+      <>
+        Choisis le prénom que tu souhaites — Tu auras un{" "}
+        <span className="text-primary">QR Code</span> à scanner au dos du magnet, te dirigeant
+        vers la page du prénom.
+      </>
+    ),
+  },
+  animaux: {
+    recto: "/images/magnet-chien-recto.jpg",
+    verso: "/images/magnet-chien-verso.jpg",
+    rectoLabel: "Animal",
+    children: (
+      <>
+        Choisis l'animal que tu souhaites — Tu auras un{" "}
+        <span className="text-primary">QR Code</span> à scanner au dos du magnet, te dirigeant
+        vers la fiche de l'animal.
+      </>
+    ),
+  },
+  "drapeau-coeur": {
+    recto: "/images/drapeau-coeur/drapeau-coeur.png",
+    verso: "/images/drapeau-coeur/drapeau-coeur-verso.png",
+    rectoLabel: "Drapeau cœur",
+    cardTo: "/catalogue/drapeau-coeur",
+    to: "/catalogue/drapeau-coeur",
+    cta: "Voir les 196 pays",
+    children: (
+      <>
+        Choisis le pays que tu souhaites — Tu auras un{" "}
+        <span className="text-primary">QR Code</span> à scanner au dos du magnet, te dirigeant
+        vers la page de recherche du pays.
+      </>
+    ),
+  },
+  message: {
+    rectoLabel: "Message",
+    to: "/personnalisation",
+    cta: "Personnaliser mon magnet",
+    children: (
+      <>
+        Choisis le message que tu souhaites — fleur, bouteille ou cadeau — Tu auras un{" "}
+        <span className="text-primary">QR Code</span> à scanner au dos du magnet.
+      </>
+    ),
+  },
+  evenements: {
+    rectoLabel: "Événement",
+    to: "/personnalisation",
+    cta: "Personnaliser mon magnet",
+    children: (
+      <>
+        Mariage, baptême ou anniversaire — choisis le visuel, le{" "}
+        <span className="text-primary">QR Code</span> au dos du magnet te dirigeant vers la
+        page de l'événement.
+      </>
+    ),
+  },
+  hommage: {
+    rectoLabel: "Hommage",
+    to: "/catalogue/hommage",
+    cta: "Ouvrir le configurateur",
+    children: (
+      <>
+        Crée le magnet hommage — une photo au recto, un texte souvenir au verso.
+      </>
+    ),
+  },
+  "fete-meres": {
+    rectoLabel: "Fête des mères",
+    to: "/catalogue/fete-meres",
+    cta: "Voir le catalogue",
+    children: (
+      <>
+        Choisis le visuel pour mamie — Tu auras un{" "}
+        <span className="text-primary">QR Code</span> à scanner au dos du magnet, te dirigeant
+        vers la page du visuel.
+      </>
+    ),
+  },
+  "saint-valentin": {
+    rectoLabel: "Saint-Valentin",
+    to: "/personnalisation",
+    cta: "Personnaliser mon magnet",
+    children: (
+      <>
+        Choisis le visuel pour ta moitié — Tu auras un{" "}
+        <span className="text-primary">QR Code</span> à scanner au dos du magnet.
+      </>
+    ),
+  },
+  "fin-annee": {
+    rectoLabel: "Fêtes de fin d'année",
+    to: "/personnalisation",
+    cta: "Personnaliser mon magnet",
+    children: (
+      <>
+        Choisis le visuel pour les fêtes — Tu auras un{" "}
+        <span className="text-primary">QR Code</span> à scanner au dos du magnet.
+      </>
+    ),
+  },
+  "premier-mai": {
+    rectoLabel: "1er Mai",
+    to: "/personnalisation",
+    cta: "Personnaliser mon magnet",
+    children: (
+      <>
+        Choisis le visuel muguet — Tu auras un{" "}
+        <span className="text-primary">QR Code</span> à scanner au dos du magnet.
+      </>
+    ),
+  },
+};
 
 export const Route = createFileRoute("/collections")({
   validateSearch: zodValidator(searchSchema),
@@ -27,7 +145,6 @@ function CollectionsPage() {
   const { famille: active } = Route.useSearch();
   const navigate = useNavigate({ from: "/collections" });
   const setActive = (id: string) => {
-    if (id === "hommage") { navigate({ to: "/catalogue/hommage" }); return; }
     navigate({ search: { famille: id } });
   };
 
@@ -57,6 +174,9 @@ function CollectionsPage() {
       <div className="mb-8">
         <FamilyChips active={active} onSelect={setActive} />
       </div>
+
+      {/* Teaser recto/verso + encart pour chaque famille */}
+      {FAMILY_TEASERS[active] && <FamilyTeaser {...FAMILY_TEASERS[active]} />}
 
       {/* Sous-catégories Animaux */}
       {active === "animaux" && (
@@ -107,34 +227,6 @@ function CollectionsPage() {
         </div>
       )}
 
-      {/* Redirect Hommage */}
-      {active === "hommage" && (
-        <div className="mb-12 flex flex-wrap gap-3">
-          <Link
-            to="/catalogue/hommage"
-            className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
-          >
-            <span className="text-base">🕊️</span>
-            Ouvrir le configurateur Hommage — Magnet rond 37 mm
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-      )}
-
-      {/* Sous-catégories Fête des mères */}
-      {active === "fete-meres" && (
-        <div className="mb-12 flex flex-wrap gap-3">
-          <Link
-            to="/catalogue/fete-meres"
-            className="group inline-flex items-center gap-2 px-4 h-11 border border-border bg-background hover:border-primary hover:text-primary transition-colors text-sm"
-          >
-            <Crown className="h-4 w-4" strokeWidth={1.5} />
-            Voir le catalogue Fête des mères &amp; grand-mères
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-      )}
-
       {/* Sous-catégories Fête des prénoms */}
       {active === "prenoms" && (
         <div className="mb-12 grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
@@ -175,56 +267,6 @@ function CollectionsPage() {
             </div>
             <p className="mt-3 text-center font-display text-lg group-hover:text-primary transition-colors">
               Prénoms mixtes
-            </p>
-          </Link>
-        </div>
-      )}
-
-      {/* Sous-catégorie Drapeau cœur */}
-      {active === "drapeau-coeur" && (
-        <div className="mb-12 grid grid-cols-2 gap-6 max-w-2xl mx-auto">
-          <Link to="/catalogue/drapeau-coeur" className="group block">
-            <div className="aspect-square overflow-hidden bg-white border border-border">
-              <img
-                src="/images/drapeau-coeur/drapeau-coeur.png"
-                alt="Catalogue Drapeau cœur"
-                loading="lazy"
-                className="w-full h-full object-contain p-4 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-              />
-            </div>
-            <p className="mt-3 text-center font-display text-lg group-hover:text-primary transition-colors">
-              Drapeau cœur
-            </p>
-          </Link>
-          <Link to="/catalogue/drapeau-coeur" className="group block">
-            <div className="aspect-square overflow-hidden bg-white border border-border">
-              <img
-                src="/images/drapeau-coeur/drapeau-coeur-verso.png"
-                alt="QR Code Drapeau cœur"
-                loading="lazy"
-                className="w-full h-full object-contain p-4 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-              />
-            </div>
-            <p className="mt-3 text-center font-display text-lg group-hover:text-primary transition-colors">
-              QR Code
-            </p>
-          </Link>
-        </div>
-      )}
-
-      {/* Encart d'aide Drapeau cœur */}
-      {active === "drapeau-coeur" && (
-        <div className="max-w-2xl mx-auto -mt-2 mb-12">
-          <Link
-            to="/catalogue/drapeau-coeur"
-            className="group block border-2 border-primary/40 bg-primary/5 px-8 py-6 text-center hover:border-primary hover:bg-primary/10 transition-colors"
-          >
-            <p className="font-display text-xl md:text-2xl leading-snug">
-              Choisis le pays que tu souhaites — Tu auras un <span className="text-primary">QR Code</span> à scanner
-              au dos du magnet, te dirigeant vers la page de recherche du pays.
-            </p>
-            <p className="mt-3 inline-flex items-center gap-2 text-sm text-primary font-medium">
-              Voir les 196 pays <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </p>
           </Link>
         </div>

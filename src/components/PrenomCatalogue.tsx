@@ -8,6 +8,7 @@ import {
   searchPrenom,
   type PrenomMagnetItem,
 } from "@/components/PrenomMagnetCanvas";
+import { MagnetPair } from "@/components/site/MagnetPair";
 
 const MAX_SUGGESTIONS = 12;
 
@@ -108,9 +109,12 @@ export function PrenomCatalogue({ items, color, breadcrumb }: PrenomCataloguePro
         <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
           Saisissez un prénom pour visualiser le magnet personnalisé.
         </p>
-        <div className="mt-8 mx-auto max-w-sm aspect-square bg-white border border-border overflow-hidden">
-          <PrenomMagnetCanvas item={matched} color={color} placeholder="Tapez un prénom" />
-        </div>
+        <MagnetPair
+          rectoContent={
+            <PrenomMagnetCanvas item={matched} color={color} placeholder="Tapez un prénom" />
+          }
+          caption="Chaque magnet porte un QR code au dos — à scanner pour retrouver la fête du prénom."
+        />
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 mb-8">

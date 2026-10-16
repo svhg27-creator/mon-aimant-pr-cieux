@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Heart, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { CatalogueDrapeauxGrid } from "@/components/CatalogueDrapeauxGrid";
+import { MagnetPair } from "@/components/site/MagnetPair";
 
 export const Route = createFileRoute("/catalogue/drapeau-coeur")({
   component: DrapeauCoeurPage,
@@ -35,6 +36,12 @@ function DrapeauCoeurPage() {
           Catalogue Drapeau cœur
         </p>
         <h1 className="font-display text-5xl mt-3">Drapeaux Cœur</h1>
+        <MagnetPair
+          recto="/images/drapeau-coeur/drapeau-coeur.png"
+          verso="/images/drapeau-coeur/drapeau-coeur-verso.png"
+          rectoAlt="Magnet drapeau cœur"
+          caption="Chaque magnet porte un QR code au dos — à scanner pour retrouver la page du pays."
+        />
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 mb-8">

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Globe } from "lucide-react";
 import { CatalogueDrapeauxGrid } from "@/components/CatalogueDrapeauxGrid";
+import { MagnetPair } from "@/components/site/MagnetPair";
 
 export const Route = createFileRoute("/catalogue/drapeau-coeur/europe")({
   component: EuropePage,
@@ -28,6 +29,12 @@ function EuropePage() {
           Catalogue Drapeau cœur
         </p>
         <h1 className="font-display text-5xl mt-3">Drapeaux cœur</h1>
+        <MagnetPair
+          recto="/images/drapeau-coeur/drapeau-coeur.png"
+          verso="/images/drapeau-coeur/drapeau-coeur-verso.png"
+          rectoAlt="Magnet drapeau cœur"
+          caption="Chaque magnet porte un QR code au dos — à scanner pour retrouver la page du pays."
+        />
       </div>
       <CatalogueDrapeauxGrid />
     </div>

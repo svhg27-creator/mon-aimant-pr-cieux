@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PawPrint } from "lucide-react";
+import { MagnetPair } from "@/components/site/MagnetPair";
 
 export const Route = createFileRoute("/catalogue/animaux/reptiles")({
   component: ReptilesPage,
@@ -30,6 +31,7 @@ function ReptilesPage() {
         <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
           Catalogue en préparation — importez votre base d'espèces pour le remplir.
         </p>
+        <MagnetPair caption="Chaque magnet porte un QR code au dos — à scanner pour retrouver le reptile." />
       </div>
       <div className="text-center py-16 border border-dashed">
         <PawPrint className="h-10 w-10 opacity-30 mx-auto" strokeWidth={1.25} />

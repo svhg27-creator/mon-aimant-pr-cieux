@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PawPrint } from "lucide-react";
 import { CatalogueGrid } from "@/components/CatalogueGrid";
+import { MagnetPair } from "@/components/site/MagnetPair";
 
 export const Route = createFileRoute("/catalogue/animaux/rongeurs")({
   component: RongeursPage,
@@ -28,6 +29,7 @@ function RongeursPage() {
           Catalogue Animaux
         </p>
         <h1 className="font-display text-5xl mt-3">Rongeurs</h1>
+        <MagnetPair caption="Chaque magnet porte un QR code au dos — à scanner pour retrouver le rongeur." />
       </div>
       <CatalogueGrid espece="rongeur" label="rongeur" />
     </div>

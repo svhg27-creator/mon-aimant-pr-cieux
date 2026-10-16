@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Crown, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useCatalogueAnimaux } from "@/hooks/useCatalogueAnimaux";
+import { MagnetPair } from "@/components/site/MagnetPair";
 
 export const Route = createFileRoute("/catalogue/fete-meres")({
   component: FeteMeresPage,
@@ -49,6 +50,7 @@ function FeteMeresPage() {
         <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
           {items.length} visuel{items.length > 1 ? "s" : ""} référencé{items.length > 1 ? "s" : ""} — choisissez votre motif pour le décliner en magnet photo personnalisé.
         </p>
+        <MagnetPair caption="Chaque magnet porte un QR code au dos — à scanner pour retrouver le visuel." />
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 mb-8">
