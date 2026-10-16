@@ -4,6 +4,7 @@ import { PawPrint, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useCatalogueAnimaux } from "@/hooks/useCatalogueAnimaux";
 import { CatalogueBuyBar } from "@/components/CatalogueBuyBar";
+import { QrPair, wikiUrl } from "@/components/site/QrPair";
 import { LAPINS } from "@/data/lapins";
 
 export const Route = createFileRoute("/catalogue/animaux/lapins")({
@@ -18,6 +19,7 @@ export const Route = createFileRoute("/catalogue/animaux/lapins")({
 
 function LapinsPage() {
   const [q, setQ] = useState("");
+  const [selected, setSelected] = useState<number | null>(null);
   const { items, loading } = useCatalogueAnimaux("lapin");
 
   const filtered = items.filter((c) => {
@@ -102,16 +104,16 @@ function LapinsPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
           {filtered.map((c) => {
             const race = LAPINS[c.image_index - 1]?.race ?? c.nom;
+            const isSelected = c.image_index === selected;
             return (
-              <article key={c.id} className="group">
-                <div className="aspect-square overflow-hidden bg-white border border-border">
-                  <img
-                    src={c.photo_url}
-                    alt={race}
-                    loading="lazy"
-                    className="w-full h-full object-contain p-2 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                  />
-                </div>
+              <article key={c.id} className={isSelected ? "col-span-2" : "group"}>
+                <QrPair
+                  photoUrl={c.photo_url}
+                  name={race}
+                  qrValue={wikiUrl(race)}
+                  selected={isSelected}
+                  onToggle={() => setSelected(isSelected ? null : c.image_index)}
+                />
                 <div className="pt-4 text-center">
                   <h3 className="font-display text-lg leading-tight group-hover:text-primary transition-colors">
                     {race}

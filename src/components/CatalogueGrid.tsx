@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useCatalogueAnimaux } from "@/hooks/useCatalogueAnimaux";
 import { CatalogueBuyBar } from "@/components/CatalogueBuyBar";
+import { QrPair, wikiUrl } from "@/components/site/QrPair";
 import { PawPrint } from "lucide-react";
 
 interface CatalogueGridProps {
@@ -9,6 +11,7 @@ interface CatalogueGridProps {
 
 export function CatalogueGrid({ espece, label }: CatalogueGridProps) {
   const { items, loading, error } = useCatalogueAnimaux(espece);
+  const [selected, setSelected] = useState<number | null>(null);
 
   if (loading) {
     return (
@@ -33,33 +36,35 @@ export function CatalogueGrid({ espece, label }: CatalogueGridProps) {
   return (
     <>
       <p className="text-muted-foreground text-center mb-8">
-        {items.length} {label} référencé{items.length > 1 ? "s" : ""} — choisissez votre compagnon pour le décliner en magnet photo personnalisé.
+        {items.length} {label} référencé{items.length > 1 ? "s" : ""} — cliquez sur une image pour voir son QR code.
       </p>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-        {items.map((item) => (
-          <article key={item.id} className="group">
-            <div className="aspect-square overflow-hidden bg-white border border-border relative">
-              <img
-                src={item.photo_url}
-                alt={item.nom}
-                loading="lazy"
-                className="w-full h-full object-contain p-2 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+        {items.map((item) => {
+          const isSelected = item.image_index === selected;
+          return (
+            <article key={item.id} className={isSelected ? "col-span-2" : "group"}>
+              <QrPair
+                photoUrl={item.photo_url}
+                name={item.nom}
+                qrValue={wikiUrl(item.nom)}
+                selected={isSelected}
+                onToggle={() => setSelected(isSelected ? null : item.image_index)}
               />
-            </div>
-            <div className="pt-4">
-              <h3 className="font-display text-lg leading-tight group-hover:text-primary transition-colors">
-                {item.nom}
-              </h3>
-              <CatalogueBuyBar
-                variantKey={`catalogue-${espece}-${item.image_index}`}
-                title={item.nom}
-                imageUrl={item.photo_url}
-                shapeLabel="Carré 37×37 mm"
-                unitPrice={4.5}
-              />
-            </div>
-          </article>
-        ))}
+              <div className="pt-4">
+                <h3 className="font-display text-lg leading-tight group-hover:text-primary transition-colors">
+                  {item.nom}
+                </h3>
+                <CatalogueBuyBar
+                  variantKey={`catalogue-${espece}-${item.image_index}`}
+                  title={item.nom}
+                  imageUrl={item.photo_url}
+                  shapeLabel="Carré 37×37 mm"
+                  unitPrice={4.5}
+                />
+              </div>
+            </article>
+          );
+        })}
       </div>
       <p className="text-xs text-muted-foreground text-center mt-12">
         {items.length} visuels disponibles

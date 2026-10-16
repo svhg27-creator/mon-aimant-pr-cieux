@@ -35,17 +35,20 @@ interface MagnetPairProps {
   verso?: string;
   rectoAlt?: string;
   rectoContent?: ReactNode;
+  versoContent?: ReactNode;
   caption: string;
 }
 
-export function MagnetPair({ recto, verso, rectoAlt = "Magnet", rectoContent, caption }: MagnetPairProps) {
+export function MagnetPair({ recto, verso, rectoAlt = "Magnet", rectoContent, versoContent, caption }: MagnetPairProps) {
   return (
     <>
       <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mt-8">
         <Side src={recto} alt={`${rectoAlt} — recto`} label="Recto">
           {rectoContent}
         </Side>
-        <Side src={verso} alt={`${rectoAlt} — verso avec QR code`} label="Verso" />
+        <Side src={verso} alt={`${rectoAlt} — verso avec QR code`} label="Verso">
+          {versoContent}
+        </Side>
       </div>
       <p className="text-xs text-muted-foreground mt-3">{caption}</p>
     </>

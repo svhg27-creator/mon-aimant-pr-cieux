@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { PawPrint } from "lucide-react";
 import { useCatalogueAnimaux, type CatalogueItem } from "@/hooks/useCatalogueAnimaux";
 import { CatalogueBuyBar } from "@/components/CatalogueBuyBar";
+import { QrPair, wikiUrl } from "@/components/site/QrPair";
 import { CHIENS } from "@/data/chiens";
 
 // Catalogue local : images dans public/catalogue/animaux/chiens/
@@ -31,6 +33,7 @@ export const Route = createFileRoute("/catalogue/animaux/chiens")({
 });
 
 function ChiensPage() {
+  const [selected, setSelected] = useState<number | null>(null);
   const { items: remote, loading } = useCatalogueAnimaux("chien");
   const items = remote.length > 0 ? remote : CHIENS_LOCAUX;
   return (
@@ -86,21 +89,21 @@ function ChiensPage() {
       ) : (
         <>
           <p className="text-muted-foreground text-center mb-8">
-            {items.length} chiens référencés — choisissez votre compagnon pour le décliner en magnet photo personnalisé.
+            {items.length} chiens référencés — cliquez sur une image pour voir son QR code.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
             {items.map((item) => {
               const race = CHIENS[item.image_index - 1]?.race ?? item.nom;
+              const isSelected = item.image_index === selected;
               return (
-                <article key={item.id} className="group">
-                  <div className="aspect-square overflow-hidden bg-white border border-border relative">
-                    <img
-                      src={item.photo_url}
-                      alt={race}
-                      loading="lazy"
-                      className="w-full h-full object-contain p-2 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                    />
-                  </div>
+                <article key={item.id} className={isSelected ? "col-span-2" : "group"}>
+                  <QrPair
+                    photoUrl={item.photo_url}
+                    name={race}
+                    qrValue={wikiUrl(race)}
+                    selected={isSelected}
+                    onToggle={() => setSelected(isSelected ? null : item.image_index)}
+                  />
                   <div className="pt-4 text-center">
                     <h3 className="font-display text-lg leading-tight group-hover:text-primary transition-colors">
                       {race}

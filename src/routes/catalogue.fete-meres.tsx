@@ -4,6 +4,7 @@ import { Crown, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useCatalogueAnimaux } from "@/hooks/useCatalogueAnimaux";
 import { MagnetPair } from "@/components/site/MagnetPair";
+import { QrPair } from "@/components/site/QrPair";
 
 export const Route = createFileRoute("/catalogue/fete-meres")({
   component: FeteMeresPage,
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/catalogue/fete-meres")({
 
 function FeteMeresPage() {
   const [q, setQ] = useState("");
+  const [selected, setSelected] = useState<number | null>(null);
   const { items, loading } = useCatalogueAnimaux("fete-meres");
 
   const filtered = items.filter(
@@ -78,23 +80,25 @@ function FeteMeresPage() {
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-          {filtered.map((c) => (
-            <article key={c.id} className="group">
-              <div className="aspect-square overflow-hidden bg-white border border-border relative">
-                <img
-                  src={c.photo_url}
-                  alt={c.nom}
-                  loading="lazy"
-                  className="w-full h-full object-contain p-2 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                />
-              </div>
+          {filtered.map((c) => {
+            const isSelected = c.id === selected;
+            return (
+            <article key={c.id} className={isSelected ? "col-span-2" : "group"}>
+              <QrPair
+                photoUrl={c.photo_url}
+                name={c.nom}
+                qrValue="https://speedvision70.com/catalogue/fete-meres"
+                selected={isSelected}
+                onToggle={() => setSelected(isSelected ? null : c.id)}
+              />
               <div className="pt-4">
                 <h3 className="font-display text-lg leading-tight group-hover:text-primary transition-colors">
                   {c.nom}
                 </h3>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       )}
 

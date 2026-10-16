@@ -9,6 +9,8 @@ import {
   type PrenomMagnetItem,
 } from "@/components/PrenomMagnetCanvas";
 import { MagnetPair } from "@/components/site/MagnetPair";
+import { wikiSearchUrl } from "@/components/site/QrPair";
+import QRCode from "react-qr-code";
 
 const MAX_SUGGESTIONS = 12;
 
@@ -112,6 +114,17 @@ export function PrenomCatalogue({ items, color, breadcrumb }: PrenomCataloguePro
         <MagnetPair
           rectoContent={
             <PrenomMagnetCanvas item={matched} color={color} placeholder="Tapez un prénom" />
+          }
+          versoContent={
+            matched ? (
+              <QRCode
+                value={wikiSearchUrl(matched.prenom)}
+                size={256}
+                style={{ width: "100%", height: "100%" }}
+                aria-label={`QR code ${matched.prenom}`}
+                className="p-2"
+              />
+            ) : undefined
           }
           caption="Chaque magnet porte un QR code au dos — à scanner pour retrouver la fête du prénom."
         />
