@@ -9,8 +9,7 @@ import {
   type PrenomMagnetItem,
 } from "@/components/PrenomMagnetCanvas";
 import { MagnetPair } from "@/components/site/MagnetPair";
-import { wikiSearchUrl } from "@/components/site/QrPair";
-import QRCode from "react-qr-code";
+import { QrWithLabel, wikiSearchUrl } from "@/components/site/QrPair";
 
 const MAX_SUGGESTIONS = 12;
 
@@ -117,12 +116,10 @@ export function PrenomCatalogue({ items, color, breadcrumb }: PrenomCataloguePro
           }
           versoContent={
             matched ? (
-              <QRCode
+              <QrWithLabel
                 value={wikiSearchUrl(matched.prenom)}
-                size={256}
-                style={{ width: "100%", height: "100%" }}
-                aria-label={`QR code ${matched.prenom}`}
-                className="p-2"
+                label={matched.prenom}
+                icon={Sparkles}
               />
             ) : undefined
           }

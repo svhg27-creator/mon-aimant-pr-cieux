@@ -101,6 +101,7 @@ function ChiensPage() {
                     photoUrl={item.photo_url}
                     name={race}
                     qrValue={wikiUrl(race)}
+                  qrIcon={PawPrint}
                     selected={isSelected}
                     onToggle={() => setSelected(isSelected ? null : item.image_index)}
                   />

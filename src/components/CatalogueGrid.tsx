@@ -47,6 +47,7 @@ export function CatalogueGrid({ espece, label }: CatalogueGridProps) {
                 photoUrl={item.photo_url}
                 name={item.nom}
                 qrValue={wikiUrl(item.nom)}
+                qrIcon={PawPrint}
                 selected={isSelected}
                 onToggle={() => setSelected(isSelected ? null : item.image_index)}
               />

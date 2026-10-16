@@ -88,6 +88,7 @@ function FeteMeresPage() {
                 photoUrl={c.photo_url}
                 name={c.nom}
                 qrValue="https://speedvision70.com/catalogue/fete-meres"
+                qrIcon={Crown}
                 selected={isSelected}
                 onToggle={() => setSelected(isSelected ? null : c.id)}
               />

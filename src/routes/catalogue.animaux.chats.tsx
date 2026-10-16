@@ -139,6 +139,7 @@ function ChatsPage() {
                   photoUrl={c.photo_url}
                   name={race}
                   qrValue={wikiUrl(race)}
+                  qrIcon={PawPrint}
                   selected={isSelected}
                   onToggle={() => setSelected(isSelected ? null : c.image_index)}
                 />
