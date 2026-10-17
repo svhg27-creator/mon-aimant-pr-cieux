@@ -2406,6 +2406,11 @@ export const PRENOMS_GARCONS: PrenomGarcon[] = [
     "sexe": "Mixte"
   },
   {
+    "prenom": "Fabio",
+    "fete_label": null,
+    "sexe": "Garçon"
+  },
+  {
     "prenom": "Fabrice",
     "fete_label": "le 22 Août",
     "sexe": "Mixte"
