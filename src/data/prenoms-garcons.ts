@@ -2407,7 +2407,7 @@ export const PRENOMS_GARCONS: PrenomGarcon[] = [
   },
   {
     "prenom": "Fabio",
-    "fete_label": null,
+    "fete_label": "le 20 Janvier",
     "sexe": "Garçon"
   },
   {
