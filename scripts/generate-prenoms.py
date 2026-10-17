@@ -91,11 +91,9 @@ def write(path, typename, constname, data):
 def main():
     fetes, filles, garcons = load()
     set_f, set_g = set(filles), set(garcons)
-    both = [n for n in filles if n in set_g]
     write(os.path.join(DATA_DIR, "prenoms-filles.ts"), "PrenomFille", "PRENOMS_FILLES", items(filles, set_f, set_g, fetes))
     write(os.path.join(DATA_DIR, "prenoms-garcons.ts"), "PrenomGarcon", "PRENOMS_GARCONS", items(garcons, set_f, set_g, fetes))
-    write(os.path.join(DATA_DIR, "prenoms-mixtes.ts"), "PrenomMixte", "PRENOMS_MIXTES", items(both, set_f, set_g, fetes))
-    print("filles:", len(filles), "garcons:", len(garcons), "mixtes:", len(both))
+    print("filles:", len(filles), "garcons:", len(garcons))
 
 
 if __name__ == "__main__":

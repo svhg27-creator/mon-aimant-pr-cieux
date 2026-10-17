@@ -33,7 +33,6 @@ import { Route as AccountFavoritesRouteImport } from './routes/account.favorites
 import { Route as AccountDashboardRouteImport } from './routes/account.dashboard'
 import { Route as AccountCreationsRouteImport } from './routes/account.creations'
 import { Route as AccountAddressesRouteImport } from './routes/account.addresses'
-import { Route as CataloguePrenomsMixtesRouteImport } from './routes/catalogue.prenoms.mixtes'
 import { Route as CataloguePrenomsGarconsRouteImport } from './routes/catalogue.prenoms.garcons'
 import { Route as CataloguePrenomsFillesRouteImport } from './routes/catalogue.prenoms.filles'
 import { Route as CatalogueDrapeauCoeurOceanieRouteImport } from './routes/catalogue.drapeau-coeur.oceanie'
@@ -171,11 +170,6 @@ const AccountAddressesRoute = AccountAddressesRouteImport.update({
   id: '/addresses',
   path: '/addresses',
   getParentRoute: () => AccountRoute,
-} as any)
-const CataloguePrenomsMixtesRoute = CataloguePrenomsMixtesRouteImport.update({
-  id: '/catalogue/prenoms/mixtes',
-  path: '/catalogue/prenoms/mixtes',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const CataloguePrenomsGarconsRoute = CataloguePrenomsGarconsRouteImport.update({
   id: '/catalogue/prenoms/garcons',
@@ -315,7 +309,6 @@ export interface FileRoutesByFullPath {
   '/catalogue/drapeau-coeur/oceanie': typeof CatalogueDrapeauCoeurOceanieRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
-  '/catalogue/prenoms/mixtes': typeof CataloguePrenomsMixtesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -358,7 +351,6 @@ export interface FileRoutesByTo {
   '/catalogue/drapeau-coeur/oceanie': typeof CatalogueDrapeauCoeurOceanieRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
-  '/catalogue/prenoms/mixtes': typeof CataloguePrenomsMixtesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -403,7 +395,6 @@ export interface FileRoutesById {
   '/catalogue/drapeau-coeur/oceanie': typeof CatalogueDrapeauCoeurOceanieRoute
   '/catalogue/prenoms/filles': typeof CataloguePrenomsFillesRoute
   '/catalogue/prenoms/garcons': typeof CataloguePrenomsGarconsRoute
-  '/catalogue/prenoms/mixtes': typeof CataloguePrenomsMixtesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -449,7 +440,6 @@ export interface FileRouteTypes {
     | '/catalogue/drapeau-coeur/oceanie'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
-    | '/catalogue/prenoms/mixtes'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -492,7 +482,6 @@ export interface FileRouteTypes {
     | '/catalogue/drapeau-coeur/oceanie'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
-    | '/catalogue/prenoms/mixtes'
   id:
     | '__root__'
     | '/'
@@ -536,7 +525,6 @@ export interface FileRouteTypes {
     | '/catalogue/drapeau-coeur/oceanie'
     | '/catalogue/prenoms/filles'
     | '/catalogue/prenoms/garcons'
-    | '/catalogue/prenoms/mixtes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -563,7 +551,6 @@ export interface RootRouteChildren {
   CatalogueAnimauxRongeursRoute: typeof CatalogueAnimauxRongeursRoute
   CataloguePrenomsFillesRoute: typeof CataloguePrenomsFillesRoute
   CataloguePrenomsGarconsRoute: typeof CataloguePrenomsGarconsRoute
-  CataloguePrenomsMixtesRoute: typeof CataloguePrenomsMixtesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -735,13 +722,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/account/addresses'
       preLoaderRoute: typeof AccountAddressesRouteImport
       parentRoute: typeof AccountRoute
-    }
-    '/catalogue/prenoms/mixtes': {
-      id: '/catalogue/prenoms/mixtes'
-      path: '/catalogue/prenoms/mixtes'
-      fullPath: '/catalogue/prenoms/mixtes'
-      preLoaderRoute: typeof CataloguePrenomsMixtesRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/catalogue/prenoms/garcons': {
       id: '/catalogue/prenoms/garcons'
@@ -956,7 +936,6 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogueAnimauxRongeursRoute: CatalogueAnimauxRongeursRoute,
   CataloguePrenomsFillesRoute: CataloguePrenomsFillesRoute,
   CataloguePrenomsGarconsRoute: CataloguePrenomsGarconsRoute,
-  CataloguePrenomsMixtesRoute: CataloguePrenomsMixtesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

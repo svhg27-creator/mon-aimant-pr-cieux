@@ -14,6 +14,8 @@ const searchSchema = z.object({
 
 const FAMILY_TEASERS: Record<string, FamilyTeaserConfig> = {
   prenoms: {
+    recto: "/images/magnet-prenom-recto.jpg",
+    verso: "/images/magnet-prenom-verso.jpg",
     rectoLabel: "Prénom",
     children: (
       <>
@@ -229,7 +231,7 @@ function CollectionsPage() {
 
       {/* Sous-catégories Fête des prénoms */}
       {active === "prenoms" && (
-        <div className="mb-12 grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        <div className="mb-12 grid grid-cols-2 gap-6 max-w-2xl mx-auto">
           <Link to="/catalogue/prenoms/garcons" className="group block">
             <div className="aspect-square overflow-hidden bg-white border border-border">
               <img
@@ -254,19 +256,6 @@ function CollectionsPage() {
             </div>
             <p className="mt-3 text-center font-display text-lg group-hover:text-primary transition-colors">
               Prénoms filles
-            </p>
-          </Link>
-          <Link to="/catalogue/prenoms/mixtes" className="group block">
-            <div className="aspect-square overflow-hidden bg-white border border-border">
-              <img
-                src="/images/prenoms/sacha.png"
-                alt="Prénoms mixtes"
-                loading="lazy"
-                className="w-full h-full object-contain p-4 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-              />
-            </div>
-            <p className="mt-3 text-center font-display text-lg group-hover:text-primary transition-colors">
-              Prénoms mixtes
             </p>
           </Link>
         </div>
