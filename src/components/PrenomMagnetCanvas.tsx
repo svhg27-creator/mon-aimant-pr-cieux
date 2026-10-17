@@ -43,16 +43,15 @@ function drawMagnet(canvas: HTMLCanvasElement, item: PrenomMagnetItem, color: st
     fontSize -= 4;
   } while (fontSize > 40);
 
-  const centerY = size / 2 - 30;
-  ctx.fillText(prenom, size / 2, centerY);
+  ctx.fillText(prenom, size / 2, size * 0.3);
 
   ctx.font = '28px Georgia, "Times New Roman", serif';
   ctx.fillStyle = "#1a1a1a";
-  ctx.fillText("se fête", size / 2, centerY + 70);
+  ctx.fillText("se fête", size / 2, size * 0.54);
 
   if (item.fete_label) {
     ctx.font = '40px Georgia, "Times New Roman", serif';
-    ctx.fillText(item.fete_label, size / 2, centerY + 130);
+    ctx.fillText(item.fete_label, size / 2, size * 0.8);
   }
 }
 
