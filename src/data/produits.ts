@@ -50,7 +50,7 @@ export const LOCAL_PRODUCTS: CatalogueProduct[] = [
     "magnet-personnalise",
     "Magnet photo personnalisé",
     "Votre photo imprimée sur un magnet premium — cadeau personnalisé, message et souvenir. Formats rond, carré, cœur et rectangle.",
-    4.5,
+    2.5,
     "/catalogue/family/message.png",
   ),
   makeProduct(
