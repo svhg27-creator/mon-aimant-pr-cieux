@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PersonnalisationRouteImport } from './routes/personnalisation'
 import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as CguRouteImport } from './routes/cgu'
@@ -59,6 +60,11 @@ const PersonnalisationRoute = PersonnalisationRouteImport.update({
 const NotreHistoireRoute = NotreHistoireRouteImport.update({
   id: '/notre-histoire',
   path: '/notre-histoire',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CollectionsRoute = CollectionsRouteImport.update({
@@ -275,6 +281,7 @@ export interface FileRoutesByFullPath {
   '/cgu': typeof CguRoute
   '/cgv': typeof CgvRoute
   '/collections': typeof CollectionsRoute
+  '/contact': typeof ContactRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
   '/account/addresses': typeof AccountAddressesRoute
@@ -317,6 +324,7 @@ export interface FileRoutesByTo {
   '/cgu': typeof CguRoute
   '/cgv': typeof CgvRoute
   '/collections': typeof CollectionsRoute
+  '/contact': typeof ContactRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
   '/account/addresses': typeof AccountAddressesRoute
@@ -361,6 +369,7 @@ export interface FileRoutesById {
   '/cgu': typeof CguRoute
   '/cgv': typeof CgvRoute
   '/collections': typeof CollectionsRoute
+  '/contact': typeof ContactRoute
   '/notre-histoire': typeof NotreHistoireRoute
   '/personnalisation': typeof PersonnalisationRoute
   '/account/addresses': typeof AccountAddressesRoute
@@ -406,6 +415,7 @@ export interface FileRouteTypes {
     | '/cgu'
     | '/cgv'
     | '/collections'
+    | '/contact'
     | '/notre-histoire'
     | '/personnalisation'
     | '/account/addresses'
@@ -448,6 +458,7 @@ export interface FileRouteTypes {
     | '/cgu'
     | '/cgv'
     | '/collections'
+    | '/contact'
     | '/notre-histoire'
     | '/personnalisation'
     | '/account/addresses'
@@ -491,6 +502,7 @@ export interface FileRouteTypes {
     | '/cgu'
     | '/cgv'
     | '/collections'
+    | '/contact'
     | '/notre-histoire'
     | '/personnalisation'
     | '/account/addresses'
@@ -535,6 +547,7 @@ export interface RootRouteChildren {
   CguRoute: typeof CguRoute
   CgvRoute: typeof CgvRoute
   CollectionsRoute: typeof CollectionsRoute
+  ContactRoute: typeof ContactRoute
   NotreHistoireRoute: typeof NotreHistoireRoute
   PersonnalisationRoute: typeof PersonnalisationRoute
   AdminPhotosRoute: typeof AdminPhotosRoute
@@ -567,6 +580,13 @@ declare module '@tanstack/react-router' {
       path: '/notre-histoire'
       fullPath: '/notre-histoire'
       preLoaderRoute: typeof NotreHistoireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/collections': {
@@ -920,6 +940,7 @@ const rootRouteChildren: RootRouteChildren = {
   CguRoute: CguRoute,
   CgvRoute: CgvRoute,
   CollectionsRoute: CollectionsRoute,
+  ContactRoute: ContactRoute,
   NotreHistoireRoute: NotreHistoireRoute,
   PersonnalisationRoute: PersonnalisationRoute,
   AdminPhotosRoute: AdminPhotosRoute,
