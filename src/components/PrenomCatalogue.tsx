@@ -10,6 +10,7 @@ import {
 } from "@/components/PrenomMagnetCanvas";
 import { MagnetPair } from "@/components/site/MagnetPair";
 import { QrWithLabel, wikiSearchUrl } from "@/components/site/QrPair";
+import { CatalogueBuyBar } from "@/components/CatalogueBuyBar";
 
 const MAX_SUGGESTIONS = 12;
 
@@ -192,6 +193,13 @@ export function PrenomCatalogue({ items, color, breadcrumb }: PrenomCataloguePro
           {matched.fete_label && (
             <p className="text-muted-foreground mt-1">{matched.fete_label}</p>
           )}
+          <CatalogueBuyBar
+            variantKey={`prenom-${matched.prenom}`}
+            title={matched.prenom}
+            imageUrl="/images/magnet-prenom-recto.jpg"
+            shapeLabel="Carré 37×37 mm"
+            unitPrice={4.5}
+          />
         </div>
       ) : q.trim() ? (
         <p className="text-center text-muted-foreground">Aucun prénom trouvé.</p>
