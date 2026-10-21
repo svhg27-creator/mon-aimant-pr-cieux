@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Search, User } from "lucide-react";
+import { User } from "lucide-react";
 import { Logo } from "./Logo";
 import { CartDrawer } from "./CartDrawer";
 import { Button } from "@/components/ui/button";
@@ -9,8 +9,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const links = [
   { to: "/collections", label: "Collections" },
   { to: "/personnalisation", label: "Personnalisation" },
-  { to: "/notre-histoire", label: "Notre Histoire" },
-  { to: "/avis", label: "Avis" },
 ];
 
 export function Navbar() {
@@ -35,9 +33,6 @@ export function Navbar() {
           ))}
         </nav>
         <div className="flex items-center justify-end gap-1">
-          <Button variant="ghost" size="icon" className="rounded-none">
-            <Search className="h-4 w-4 text-primary" strokeWidth={1.5} />
-          </Button>
           <CartDrawer />
           {!loading && (
             user ? (
