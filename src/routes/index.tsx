@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, Magnet, Gift, Truck, Factory } from "lucide-react";
+import { ArrowRight, Sparkles, Magnet, Truck, Factory } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FamilyChips } from "@/components/site/FamilyChips";
 import { FamilyFrames } from "@/components/site/FamilyFrames";
@@ -57,15 +57,14 @@ function HomePage() {
       <FamilyFrames />
 
 
-      {/* 3 STEPS */}
+      {/* 2 STEPS */}
       <section className="bg-secondary/40 mt-24 py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="font-display text-3xl md:text-4xl">Trois étapes vers votre héritage digital</h2>
-          <div className="grid md:grid-cols-3 gap-10 mt-14">
+          <h2 className="font-display text-3xl md:text-4xl">Deux étapes vers votre héritage digital</h2>
+          <div className="grid md:grid-cols-2 gap-10 mt-14 max-w-2xl mx-auto">
             {[
               { icon: Sparkles, t: "Sélectionnez vos photos", d: "Importez vos clichés préférés directement depuis votre téléphone ou Instagram." },
               { icon: Magnet, t: "Personnalisez le style", d: "Choisissez vos formats, cadres et filtres pour un rendu unique et haut de gamme." },
-              { icon: Gift, t: "Recevez votre écrin", d: "Vos magnets arrivent dans un packaging élégant, prêts à être exposés ou offerts." },
             ].map((s) => (
               <div key={s.t}>
                 <div className="mx-auto w-14 h-14 grid place-items-center bg-background border border-border">
