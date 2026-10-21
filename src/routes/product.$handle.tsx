@@ -120,7 +120,7 @@ function ProductPage() {
           )}
 
           <div className="flex flex-wrap gap-6 mt-6 text-sm text-foreground/75">
-            <div className="flex items-center gap-2"><Truck className="h-4 w-4 text-primary" strokeWidth={1.5} /> Livraison 48h</div>
+            <div className="flex items-center gap-2"><Truck className="h-4 w-4 text-primary" strokeWidth={1.5} /> Livraison 48h-72h</div>
             <div className="flex items-center gap-2"><Factory className="h-4 w-4 text-primary" strokeWidth={1.5} /> Fabrication française</div>
           </div>
         </div>

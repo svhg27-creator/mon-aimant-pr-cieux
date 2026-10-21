@@ -61,7 +61,7 @@ export function MagnetConfigurator() {
             <PriceDisplay />
             <AddToCartButton />
             <p className="text-xs text-center text-muted-foreground">
-              Frais de livraison calculés à l'étape suivante. Fabrication française, livraison 48h.
+              Frais de livraison calculés à l'étape suivante. Fabrication française, livraison 48h-72h.
             </p>
           </section>
         </div>

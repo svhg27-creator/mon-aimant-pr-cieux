@@ -114,9 +114,8 @@ function HomePage() {
 
       {/* DELIVERY BAND */}
       <section className="max-w-7xl mx-auto px-6 py-12 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm text-foreground/80">
-        <div className="flex items-center gap-2"><Truck className="h-4 w-4 text-primary" strokeWidth={1.5} /> Livraison 48h en France</div>
+        <div className="flex items-center gap-2"><Truck className="h-4 w-4 text-primary" strokeWidth={1.5} /> Livraison 48h-72h en France</div>
         <div className="flex items-center gap-2"><Factory className="h-4 w-4 text-primary" strokeWidth={1.5} /> Fabrication française</div>
-        <div className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" strokeWidth={1.5} /> Satisfait ou remboursé 30 jours</div>
       </section>
     </div>
   );
