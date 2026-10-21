@@ -14,17 +14,11 @@ export function Footer() {
 
         <FooterCol
           title="Service"
-          links={[
-            { label: "Livraison", to: "/livraison" },
-            { label: "Qualité", to: "/qualite" },
-          ]}
+          links={[{ label: "Livraison", to: "/livraison" }]}
         />
         <FooterCol
           title="Aide"
-          links={[
-            { label: "Contact", to: "/contact" },
-            { label: "FAQ", to: "/faq" },
-          ]}
+          links={[{ label: "Contact", to: "/contact" }]}
         />
         <FooterCol
           title="Légal"
@@ -32,7 +26,6 @@ export function Footer() {
             { label: "CGU", to: "/cgu" },
             { label: "CGV", to: "/cgv" },
             { label: "Paiement sécurisé", to: "/paiement" },
-            { label: "Newsletter", to: "/newsletter" },
           ]}
         />
       </div>
